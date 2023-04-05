@@ -1,0 +1,121 @@
+<template>
+  <div class="admin-coupon container">
+    <h1>優惠卷</h1>
+    <div>
+      <!-- <Loading :active="isLoading" :z-index="1060"></Loading> -->
+      <div class="text-end mt-4">
+        <button class="btn btn-info" type="button" @click="openCouponModal(true,item)">
+          建立新的優惠券
+        </button>
+      </div>
+      <table class="table mt-4">
+        <thead>
+        <tr>
+          <th>名稱</th>
+          <th>折扣百分比</th>
+          <th>到期日</th>
+          <th>是否啟用</th>
+          <th>編輯</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, key) in coupons" :key="key">
+          <td>{{ item.title }}</td>
+          <td>{{ item.percent }}%</td>
+          <td>{{ new Date(item.due_date).toLocaleDateString('zh-TW') }}</td>
+          <!-- const dateString = new Date(item.due_date).toLocaleDateString('zh-TW'); -->
+          <td>
+            <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
+            <span v-else class="text-muted">未啟用</span>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-outline-info btn-sm"
+                      @click="openCouponModal(false,item)"
+              >編輯</button>
+              <button class="btn btn-outline-danger btn-sm"
+                      @click="delCouponModal(item)"
+              >刪除</button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <coupon-modal ref="couponModal" :is-new="isNew" :coupon="tempCoupon" :get-coupons="getCoupons"></coupon-modal>
+      <delCouponModal ref="delcouponModal" :coupon="tempCoupon" :get-coupons="getCoupons"></delCouponModal>
+    </div>
+  </div>
+
+</template>
+
+<script>
+import couponModal from '../../components/CouponModal.vue'
+import delCouponModal from '../../components/delCouponModal.vue'
+const { VITE_APP_URL } = import.meta.env
+export default {
+  data () {
+    return {
+      isNew: '',
+      coupons: [],
+      tempCoupon: {
+        title: '',
+        is_enabled: 0,
+        percent: 100,
+        code: ''
+      }
+    }
+  },
+  components: {
+    couponModal, delCouponModal
+  },
+  methods: {
+    openCouponModal (isNew, item) {
+      this.isNew = isNew
+      this.tempCoupon.title = ''
+      this.tempCoupon.is_enabled = ''
+      this.tempCoupon.percent = ''
+      this.tempCoupon.code = ''
+      this.tempCoupon.due_date = new Date().getTime() / 1000
+      if (this.isNew) {
+        this.$refs.couponModal.openModal()
+      } else {
+        this.tempCoupon = { ...item }
+        this.$refs.couponModal.openModal()
+        console.log(this.tempCoupon)
+      }
+    },
+    delCouponModal (item) {
+      this.tempCoupon = { ...item }
+      this.$refs.delcouponModal.openModal()
+    },
+    getCoupons () {
+      this.$http.get(`${VITE_APP_URL}/v2/api/wlc606/admin/coupons`)
+        .then(res => {
+          console.log(res.data)
+          this.coupons = res.data.coupons
+        }).catch(err => {
+          console.log(err)
+        })
+    }
+    // editCoupons () {
+    //   this.$http.put(`${VITE_APP_URL}/v2/api/wlc606/admin/coupon/id`)
+    //     .then(res => {
+    //       console.log(res.data)
+    //       this.coupons = res.data.coupons
+    //     }).catch(err => {
+    //       console.log(err)
+    //     })
+    // }
+    // openDelCouponModal (item) {
+    //   console.log(123)
+    // }
+  },
+  mounted () {
+    // 取出token
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    // 預設token帶入header
+    this.$http.defaults.headers.common.Authorization = token
+    this.getCoupons()
+  }
+}
+</script>

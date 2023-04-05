@@ -1,0 +1,94 @@
+.tastyDetail{   
+  ol > li > a {color:$gray-600};
+
+  section{
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb > .active,.breadcrumb > .active a {
+    color: black;
+  }
+
+  .tastyDetail-product{
+    // padding-left: 81px;
+    img{
+      width: 100%;
+      height: auto;
+    }
+    .badge{
+      font-size: 14px;
+      vertical-align: super;
+    }
+    .price{
+      font-size:24px ;
+      color: red;
+    }
+    
+    button{
+      color: #0E376F;
+    }
+    select{
+      border:2px solid black;
+    }
+  }
+
+  .tastyDetail-breadcrumb{
+    .router-link-custom:hover{
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+  }
+  .tastyDetail-breadcrumb-list,.tastyDetail-product-item{
+    width: 90%;
+  }
+
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .slide-img {    
+    width: 100%;
+    padding-bottom: 72%;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .swiper-father {      
+    position: relative;   
+    .swiper{
+      width: 90%;
+    } 
+  }
+
+  .swiper-button-prev,.swiper-button-next{
+    position: absolute;
+    top: 50%;           
+  }
+
+
+  .swiper-button-prev img,
+  .swiper-button-next img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    display: none;
+  }
+  swiper-slide{
+    height: 100%;
+  }
+}
+
+/*RWD*/
+@include media-breakpoint-down(sm) {
+  .tastyDetail{
+    .tastyDetail-breadcrumb-list,.tastyDetail-product-item{
+      width: 100%;
+    }   
+  } 
+ }
