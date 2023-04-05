@@ -60,7 +60,7 @@
 import PaginationComponents from '../../components/PaginationComponents.vue'
 import ProductModal from '../../components/ProductModal.vue'
 import delproductModal from '../../components/delproductModal.vue'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     getProduct (page) {
-      this.$http.get(`${VITE_APP_URL}/v2/api/wlc606/admin/products/?page=${page}`)
+      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/products/?page=${page}`)
         .then(res => {
           this.product = res.data.products
           this.page = res.data.pagination
@@ -93,12 +93,12 @@ export default {
       this.template = item
       console.log('updateProduct')
       let httpMethod = 'post'
-      let api = `${VITE_APP_URL}/v2/api/wlc606/admin/product`
+      let api = `${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/product`
       // 編輯 put
       if (!this.isNew) {
         httpMethod = 'put'
         console.log(this.template)
-        api = `${VITE_APP_URL}/v2/api/wlc606/admin/product/${this.template.id}`
+        api = `${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/product/${this.template.id}`
       }
       this.$http[httpMethod](api, { data: this.template })
 
@@ -115,7 +115,7 @@ export default {
 
     // 刪除
     delProduct () {
-      this.$http.delete(`${VITE_APP_URL}/v2/api/wlc606/admin/product/${this.template.id}`)
+      this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/product/${this.template.id}`)
         .then(res => {
           this.$refs.delproductModal.hideModal()
           alert('刪除成功')

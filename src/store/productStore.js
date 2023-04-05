@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 
 export default defineStore('productStore', {
 
@@ -8,7 +8,7 @@ export default defineStore('productStore', {
   }),
   actions: {
     getProducts () {
-      this.$http.get(`${VITE_APP_URL}/v2/api/wlc606/products/all`)
+      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
           console.log(res)
           this.products = res.data.products

@@ -51,7 +51,7 @@
 <script>
 import couponModal from '../../components/CouponModal.vue'
 import delCouponModal from '../../components/delCouponModal.vue'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
@@ -89,7 +89,7 @@ export default {
       this.$refs.delcouponModal.openModal()
     },
     getCoupons () {
-      this.$http.get(`${VITE_APP_URL}/v2/api/wlc606/admin/coupons`)
+      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupons`)
         .then(res => {
           console.log(res.data)
           this.coupons = res.data.coupons
@@ -97,18 +97,6 @@ export default {
           console.log(err)
         })
     }
-    // editCoupons () {
-    //   this.$http.put(`${VITE_APP_URL}/v2/api/wlc606/admin/coupon/id`)
-    //     .then(res => {
-    //       console.log(res.data)
-    //       this.coupons = res.data.coupons
-    //     }).catch(err => {
-    //       console.log(err)
-    //     })
-    // }
-    // openDelCouponModal (item) {
-    //   console.log(123)
-    // }
   },
   mounted () {
     // 取出token

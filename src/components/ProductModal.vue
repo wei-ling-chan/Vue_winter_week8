@@ -119,7 +119,7 @@
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               取消
             </button>
-            <button type="button" class="btn btn-primary" @click="updateProduct">
+            <button type="button" class="btn btn-info" @click="updateProduct">
               確認
             </button>
           </div>
@@ -130,7 +130,7 @@
 
 <script>
 import Modal from 'bootstrap/js/dist/modal'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default ({
   props: ['product'],
   data () {
@@ -166,7 +166,7 @@ export default ({
       const formData = new FormData()
       formData.append('file-to-upload', uploadedFile)
       this.status.fileUploading = true
-      this.$http.post(`${VITE_APP_URL}/v2/api/wlc606/admin/upload`, formData)
+      this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/upload`, formData)
         .then(res => {
           this.status.fileUploading = false
           console.log(res.data.imageUrl)

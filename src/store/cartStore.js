@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
 import Swal from 'sweetalert2'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default defineStore('cart', {
 
   state: () => ({
@@ -12,7 +12,7 @@ export default defineStore('cart', {
   actions: {
     // 取得購物車
     getCart () {
-      axios.get(`${VITE_APP_URL}/v2/api/wlc606/cart`)
+      axios.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then(res => {
           console.log(45646)
           this.storeCarts = res.data.data.carts
@@ -33,7 +33,7 @@ export default defineStore('cart', {
         product_id: id,
         qty
       }
-      axios.post(`${VITE_APP_URL}/v2/api/wlc606/cart`, { data })
+      axios.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`, { data })
         .then(res => {
           console.log(res.data)
           // alert('加入購物車成功!')

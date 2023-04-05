@@ -1,6 +1,6 @@
 <template>
   <div class="news">
-    <section class="banner" style="background-image:url('src/assets/images/news-banner.jpg')">
+    <section class="banner banner-news">
       <div class="banner-title h-100">
         <div class="row  h-100 position-relative g-0">
           <div class="col-md-6 col-12  offset-md-3  banner-title position-absolute">
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     filterNewsProducts () {
-      this.$http.get(`${VITE_APP_URL}/v2/api//${VITE_APP_PATH}/products/all`)
+      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
           console.log(res)
           this.products = res.data.products

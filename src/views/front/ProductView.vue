@@ -7,13 +7,21 @@
           :is-full-page="fullPage"/>
   <div class="tastyDetail bg-primary">
     <div class="tastyDetail">
-    <section class="banner" style="background-image:url('src/assets/images/about-banner.png')">
-      <div class="banner-title position-absolute w-100">
-        <h2 class="text-light"><span class="border-bottom border-light border-4 banner-delicious-title">美味</span>專區</h2>
-        <P class="text-light fs-3 banner-subtitle">DELICIOUS ZONE</P>
-      </div>
-      <div class="banner-info position-absolute">
-        <p class="text-light fs-4">採用天然新鮮食材精心製作，呈現美味</p>
+    <section class="banner banner-product">
+      <div class="banner-title h-100">
+        <div class="row  h-100 position-relative g-0">
+          <div class="col-md-6 col-12  offset-md-3 banner-title position-absolute">
+            <h2 class="text-light"><span class="banner-delicious-title">美味</span>專區</h2>
+            <p class="text-light banner-subtitle">DELICIOUS ZONE</p>
+            <!-- <img src="../../assets/images/tasty-banner.jpg" alt=""> -->
+          </div>
+          <div class="col-md-10 col-12 banner-info position-absolute">
+            <!--pc-->
+            <p class="text-light offset-md-5 d-none d-md-block">採用天然新鮮食材精心製作，呈現美味。</p>
+            <!--mobile-->
+            <p class="text-light offset-md-5 d-block d-md-none banner-info-mobile">採用天然新鮮食材精心製作，<br>呈現美味。</p>
+          </div>
+        </div>
       </div>
     </section>
 

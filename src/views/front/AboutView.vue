@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <section class="banner" style="background-image:url('src/assets/images/about-banner.png')">
+    <section class="banner banner-about">
       <div class="banner-title h-100">
         <div class="row  h-100 position-relative g-0">
           <div class="col-md-6 col-12  offset-md-3  banner-title position-absolute">

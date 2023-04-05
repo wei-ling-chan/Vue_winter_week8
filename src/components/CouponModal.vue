@@ -47,7 +47,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-info"
 
                   @click="creatCoupon"> {{ isNew ? '新增優惠卷' : '更新優惠券' }}
           </button>
@@ -59,7 +59,7 @@
 
 <script>
 import Modal from 'bootstrap/js/dist/modal'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   props: ['isNew', 'coupon', 'getCoupons'],
   data () {
@@ -92,7 +92,7 @@ export default {
       if (this.isNew === true) {
         this.hideModal()
         const data = this.tempCoupon
-        this.$http.post(`${VITE_APP_URL}/v2/api/wlc606/admin/coupon`, { data })
+        this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupon`, { data })
           .then(res => {
             this.getCoupons()
           }).catch(err => {
@@ -101,7 +101,7 @@ export default {
       } else if (this.isNew === false) { // 編輯優惠卷
         this.hideModal()
         const data = this.tempCoupon
-        this.$http.put(`${VITE_APP_URL}/v2/api/wlc606/admin/coupon/${this.tempCoupon.id}`, { data })
+        this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`, { data })
           .then(res => {
             this.getCoupons()
           }).catch(err => {
@@ -109,22 +109,6 @@ export default {
           })
       }
     }
-
-    // editCoupon () {
-    //   this.tempCoupon.due_date = new Date(this.tempCoupon.due_date).getTime() // 將日期轉換為Date對象，再換為時間戳(以毫秒為單位)
-    //   this.hideModal()
-    //   console.log(this.tempCoupon.id)
-    //   const id = this.tempCoupon.id
-    //   const data = this.tempCoupon
-    //   this.$http.put(`${VITE_APP_URL}/v2/api/wlc606/admin/coupon/${id}`, { data })
-    //     .then(res => {
-    //       console.log(res.data.message)
-
-    //       this.getCoupons()
-    //     }).catch(err => {
-    //       console.log(err)
-    //     })
-    // }
   },
   watch: {
     coupon () {

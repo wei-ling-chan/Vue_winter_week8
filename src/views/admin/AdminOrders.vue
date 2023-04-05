@@ -69,7 +69,7 @@
 <script>
 import orderModal from '../../components/adminOrderModal.vue'
 import delOrderModal from '../../components/delOrderModal.vue'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
@@ -89,7 +89,7 @@ export default {
     // 取得後台訂單
     getAdminOrders (currentPage = 1) {
       this.currentPage = currentPage
-      this.$http.get(`${VITE_APP_URL}/v2/api/wlc606/admin/orders?page=${currentPage}`)
+      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/orders?page=${currentPage}`)
         .then(res => {
           console.log(res.data.success)
           this.adminOrders = res.data.orders
@@ -109,7 +109,7 @@ export default {
       this.paid = {
         is_paid: adminOrder.is_paid
       }
-      this.$http.put(`${VITE_APP_URL}/v2/api/wlc606/admin/order/${adminOrder.id}`, { data: this.paid })
+      this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/order/${adminOrder.id}`, { data: this.paid })
         .then((res) => {
           alert(res.data.message)
           console.log('updatePaid', res.data)
@@ -119,7 +119,7 @@ export default {
     },
     delAdminOrder () {
       console.log(this.tempOrder.id)
-      this.$http.delete(`${VITE_APP_URL}/v2/api/wlc606/admin/order/${this.tempOrder.id}`)
+      this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/order/${this.tempOrder.id}`)
         .then(res => {
           alert(res.data.message)
           this.delorderComponent.hideModal()

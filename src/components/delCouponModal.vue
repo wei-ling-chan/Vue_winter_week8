@@ -28,7 +28,7 @@
 
 <script>
 import Modal from 'bootstrap/js/dist/modal'
-const { VITE_APP_URL } = import.meta.env
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   props: ['coupon', 'getCoupons'],
   data () {
@@ -52,7 +52,7 @@ export default {
     delCoupon () {
       this.tempCoupon = this.coupon
       const data = this.tempCoupon
-      this.$http.delete(`${VITE_APP_URL}/v2/api/wlc606/admin/coupon/${this.tempCoupon.id}`, { data })
+      this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`, { data })
         .then(res => {
           this.hideModal()
           this.getCoupons()

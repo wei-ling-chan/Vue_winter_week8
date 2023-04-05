@@ -7,7 +7,7 @@
           :loader="loader"
           :is-full-page="fullPage"/>
   <div class="tasty bg-primary pb-36">
-    <section class="banner" style="background-image:url('src/assets/images/tasty-banner.jpg')">
+    <section class="banner banner-products">
       <div class="banner-title h-100">
         <div class="row  h-100 position-relative g-0">
           <div class="col-md-6 col-12  offset-md-3 banner-title position-absolute">
@@ -178,7 +178,7 @@
           </form>
         </section>
       </div>
-      <section class="tasty-menu-fixed text-center bg-primary my-md-100 mt-5 fixed-right" data-aos="fade-right">
+      <section class="tasty-menu-fixed text-center bg-primary my-md-100 mt-5 fixed-right" data-aos="fade-right" style="display:none;">
       <div class="column text-light">
         <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('cool-noodle')"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
         <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('soup-noodle')"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>

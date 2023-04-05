@@ -3,8 +3,7 @@
 
   section{
     margin-bottom: 2rem;
-  }
-
+  }  
   .breadcrumb > .active,.breadcrumb > .active a {
     color: black;
   }
@@ -83,7 +82,9 @@
     height: 100%;
   }
 }
-
+.banner-product{
+  background-image: url(./images/tasty-banner.jpg);
+}
 /*RWD*/
 @include media-breakpoint-down(sm) {
   .tastyDetail{
