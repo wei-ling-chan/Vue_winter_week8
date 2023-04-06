@@ -32,8 +32,8 @@
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('cool-noodle')"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('soup-noodle')"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('fride')"><div><img src="../../assets/images/fried-chicken.png" alt=""><span class="d-block">炸物</span></div></div>
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('soup')"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('side-desh')"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('soup')"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
           </div>
         </section>
         <section class="tasty-list">
@@ -183,8 +183,8 @@
         <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('cool-noodle')"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
         <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('soup-noodle')"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>
         <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('fride')"><div><img src="../../assets/images/fried-chicken.png" alt=""><span class="d-block">炸物</span></div></div>
-        <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('side-desh')"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
-        <div class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('soup')"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
+        <div class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('side-desh')"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
+        <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('soup')"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
       </div>
     </section>
     </div>

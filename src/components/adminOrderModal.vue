@@ -57,13 +57,13 @@
                   <tr>
                     <th>下單時間</th>
                      <!-- filter -->
-                    <td>{{ tempOrder.create_at }}</td>
+                    <td>{{formattedDate(tempOrder.create_at, 'yyyy-MM-dd')}}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
                     <td>
                       <span v-if="tempOrder.paid_date">
-                        {{ $filters.date(tempOrder.paid_date) }}
+                        {{ formattedDate(tempOrder.paid_date, 'yyyy-MM-dd')}}
                       </span>
                       <span v-else>時間不正確</span>
                     </td>
@@ -163,6 +163,10 @@ export default {
     },
     changestatus (tempOrder) {
       this.$emit('change-status', tempOrder)
+    },
+    formattedDate (timestamp, format) {
+      const date = new Date(timestamp * 1000) // 将 Unix 时间戳转换为 JavaScript Date 对象
+      return date.toLocaleDateString(undefined, { dateFormat: format })
     }
   },
   watch: {

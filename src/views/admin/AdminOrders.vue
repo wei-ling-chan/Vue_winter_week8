@@ -93,9 +93,6 @@ export default {
         .then(res => {
           console.log(res.data.success)
           this.adminOrders = res.data.orders
-          // this.timestamp = this.adminOrders.filter(function (item) {
-          //   return 123
-          // })
           console.log(this.adminOrders)
           this.formattedDate()
         })

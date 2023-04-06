@@ -252,7 +252,7 @@ export default {
     // 刪除單一品項購物車
     deleteCartItem (item) {
       this.lodingItem = item.id
-      this.$http.delete(`${VITE_APP_URL}/v2/api/wlc606/cart/${item.id}`)
+      this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`)
         .then(res => {
           Swal.fire({
             title: '刪除成功!',
