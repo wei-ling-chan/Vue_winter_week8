@@ -5,7 +5,7 @@
           :on-cancel="onCancel"
           :loader="loader"
           :is-full-page="fullPage"/>
-  <div class="tastyDetail bg-primary">
+  <div class="tastyDetail">
     <div class="tastyDetail">
     <section class="banner banner-product">
       <div class="banner-title h-100">
@@ -13,7 +13,6 @@
           <div class="col-md-6 col-12  offset-md-3 banner-title position-absolute">
             <h2 class="text-light"><span class="banner-delicious-title">美味</span>專區</h2>
             <p class="text-light banner-subtitle">DELICIOUS ZONE</p>
-            <!-- <img src="../../assets/images/tasty-banner.jpg" alt=""> -->
           </div>
           <div class="col-md-10 col-12 banner-info position-absolute">
             <!--pc-->
@@ -29,7 +28,7 @@
       <section class="tastyDetail-breadcrumb d-flex mx-4">
         <div class="tastyDetail-breadcrumb-list mx-auto d-flex justify-content-between">
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb my-5">
+            <ol class="breadcrumb my-2 my-md-4">
               <router-link to="/" class="breadcrumb-item text-dark router-link-custom" style="text-decoration:none;">首頁</router-link>
               <router-link to="/products" class="breadcrumb-item text-dark router-link-custom" style="text-decoration: none;">美味專區</router-link>
               <li class="breadcrumb-item active" aria-current="page">產品詳頁</li>
@@ -38,16 +37,15 @@
         </div>
       </section>
 
-      <section class="tastyDetail-product mx-3 mb-100">
+      <section class="tastyDetail-product mx-3">
         <div class="tastyDetail-product-item mx-auto">
           <div class="row">
             <div class="col-12 col-md-6 px-4">
               <div><img :src="product.imageUrl" alt="" class="rounded"></div>
             </div>
             <div class="product-info col-12 col-md-6 px-4">
-
               <div class="row">
-                <div class="col-12 mb-3"><h1 class="">{{ product.title}}<span class="badge bg-info ms-2 product_type">{{product.category}}</span></h1></div>
+                <div class="col-12 mb-md-3 my-4"><h1 class="">{{ product.title}}<span class="badge bg-info ms-2 product_type">{{product.category}}</span></h1></div>
                 <div class="col-3">產品描述:</div>
                 <div class="col-9 pb-3 ps-0 description">{{ product.description}}</div>
                 <div class="col-3">商品內容:</div>
@@ -65,7 +63,20 @@
           </div>
         </div>
       </section>
-      <section class="pb-100">
+      <section class="customer-notice container-fluid p-4 my-md-8 my-6">
+        <div class=" border border-1 border-dark p-4">
+          <p class="h5 text-center mb-4">客戶須知:</p>
+          <ul class="ps-0 ps-md-4">
+            <li class="py-2">1.線上訂購預約時間：如果您透過線上訂購進行當日預約，請預留約20分鐘的時間，我們將為您準備好餐點，以確保順利取餐。</li>
+            <li class="py-2">2.麵體與湯類分開包裝：為了提供良好的使用體驗，我們將麵體和湯類分開包裝，確保麵食的口感和湯汁的風味保持最佳狀態。</li>
+            <li class="py-2">3.新鮮煮熟麵的最佳食用時限：我們建議您盡快食用新鮮煮熟的麵食，以確保最佳的口感和風味。</li>
+            <li class="py-2">4.訂購方式：您可以選擇在店內現場訂購，或透過我們的線上訂購系統進行訂購。</li>
+            <li class="py-2">5.付款方式：為了您的方便，我們接受現金、Line Pay和信用卡三種付款方式。您可以根據個人偏好選擇最適合您的付款方式。</li>
+          </ul>
+        </div>
+
+      </section>
+      <section class="my-0 my-md-4">
         <div class="maybe-like">
           <h3 class="text-center mb-5">或許你會喜歡...</h3>
         </div>
@@ -91,7 +102,7 @@
                 <div class="card-body h-100 d-flex flex-column justify-content-between">
                   <div>
                     <h4 class="card-title">{{item.title}}</h4>
-                    <p class="card-text">{{item.content}}</p>
+                    <p class="card-text swiper-overflow">{{item.content}}</p>
                   </div>
                   <div>
                     <p class="card-text">NT <span class="text-dangers">${{item.price}}</span></p>

@@ -1,4 +1,12 @@
+.bg-black {
+  background-color: rgb(0, 0, 0,1);
+}
+.bg-transcolor {
+  background-color: rgb(0, 0, 0,0.5);
+}
 .header{
+  
+  
   
   .logo{
    max-width: 200px;
@@ -7,7 +15,12 @@
   .bi-person,.bi-search,.bi-cart{
     font-size: 28px;
   }
+  .bi-cart-fill{
+    color: white;
+  }
   .cart-badge{
+    background-color: red;
+    color: white;
     transform: translateX(-7px) translateY(-15px);
     font-size: 10px;
   }  
@@ -24,7 +37,7 @@
   }  
 }
 .banner{
-  height: 50vh;    
+  height: 63vh;    
   background-size: cover;    
   background-position:center center;
   background-repeat: no-repeat;
@@ -40,7 +53,7 @@
     opacity: 0.3;
   }
   .banner-title{
-    top:18%;      
+    top:30%;      
     z-index: 1;
   }
   .banner-subtitle{

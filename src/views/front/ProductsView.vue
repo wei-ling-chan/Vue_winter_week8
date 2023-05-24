@@ -6,7 +6,7 @@
           :on-cancel="onCancel"
           :loader="loader"
           :is-full-page="fullPage"/>
-  <div class="tasty bg-primary pb-36">
+  <div class="tasty pb-36">
     <section class="banner banner-products">
       <div class="banner-title h-100">
         <div class="row  h-100 position-relative g-0">
@@ -27,38 +27,45 @@
   <div>
     <div class="container">
       <div>
-        <section class="tasty-menu text-center bg-primary my-md-100 mt-5" data-aos="fade-right">
+        <section class="tasty-menu text-center my-md-100 mt-5" data-aos="fade-right">
           <div class="row text-light justify-evenly justify-content-sm-center ps-4">
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('cool-noodle')"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('soup-noodle')"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('fride')"><div><img src="../../assets/images/fried-chicken.png" alt=""><span class="d-block">炸物</span></div></div>
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('side-desh')"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3"  @click="scrollMeTo('soup')"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3 d-flex justify-content-center align-items-center" @click="testItems ('全部商品')" :class="{ 'active': selectedItem === '全部商品' }"><div>全部商品</div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="testItems ('涼麵')" :class="{ 'active': selectedItem === '涼麵' }"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="testItems ('湯麵')" :class="{ 'active': selectedItem === '湯麵' }"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="testItems ('炸物')" :class="{ 'active': selectedItem === '炸物' }"><div><img src="../../assets/images/fried-chicken.png" alt=""><span class="d-block">炸物</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="testItems ('精緻小菜')" :class="{ 'active': selectedItem === '精緻小菜' }"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="testItems ('湯品')" :class="{ 'active': selectedItem === '湯品' }"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
           </div>
         </section>
         <section class="tasty-list">
           <form action="tastyDetail2.html">
-            <input type="hidden" id="product" name="product" value="">
-                  <!--cool-noodle-->
-              <div class="cool-noodle my-5" ref="cool-noodle">
+            <div class="d-flex justify-content-end mt-7">
+                <input type="text" class="form-control form-search border-2 border-secondary" name="keyword" placeholder="搜尋產品"  ref="serch" v-on:keydown.enter.prevent="handleMouseDown" style="width: 20%;">
+                <button type="button" class="btn"><i class="bi bi-search" @click="searchProduct"></i></button>
+            </div>
+                  <!--filter product-->
+              <div class="filter-product my-5" ref="filter-product" v-if="isfilter">
                 <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">涼麵 <span class="fs-6">COLD NOODLES</span></h2>
                 </div>
                 <div class="row" >
-                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('涼麵')" :key="product.id">
+                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in products" :key="product.id">
                     <div class="card mx-2 my-4">
-                      <img :src="product.imageUrl" alt="" class="slide-img">
+                      <div class="slide-hover">
+                        <img :src="product.imageUrl" alt="" class="slide-img">
+                      </div>
                       <div class="card-body p-3">
-                      <div class="row  mb-4 tasty-item">
-                        <h5 class="card-title col-7 col-md-12 fw-bolder tasty-item-title">{{product.title}}</h5>
-                        <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price">NT$ {{product.price}}</div>
-                          <div class="card-text  text-md end tasty-item-price fs-6">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                      <div class="mb-4 tasty-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                          <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                          <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
                         </div>
-
+                        <div class="d-flex justify-content-between">
+                          <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                          <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                        </div>
                       </div>
                       <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
+                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
                         <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
                       </div>
                       </div>
@@ -66,110 +73,168 @@
                   </div>
                 </div>
               </div>
-                <!--soup-noodle-->
-              <div class="soup-noodle my-5" ref="soup-noodle">
-                <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">湯麵 <span class="fs-6">COLD NOODLES</span></h2>
-                </div>
-                <div class="row" >
-                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('湯麵')" :key="product.id">
-                    <div class="card mx-2 my-4">
-                      <img :src="product.imageUrl" alt="" class="slide-img">
-                      <div class="card-body p-3">
-                      <div class="row  mb-4 tasty-item">
-                        <h5 class="card-title col-7 col-md-12 fw-bolder tasty-item-title">{{product.title}}</h5>
-                        <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price">NT$ {{product.price}}</div>
-                          <div class="card-text  text-md end tasty-item-price fs-6">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+              <!-- all -->
+              <div v-else>
+                <!--cool-noodle-->
+                <div class="cold-noodle my-5" ref="cold-noodle">
+                  <div class="d-flex justify-content-center">
+                    <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">涼麵 <span class="fs-6">COLD NOODLES</span></h2>
+                  </div>
+                  <div class="row" >
+                    <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('涼麵')" :key="product.id">
+                      <div class="card mx-2 my-4 position-relative">
+                        <div class="slide-hover">
+                          <img :src="product.imageUrl" alt="" class="slide-img">
+                        </div>
+                        <div class="position-absolute top-3 end-5"><div class="position-absolute top-3 end-5"></div></div>
+                        <div class="card-body p-3">
+                        <div class="row  mb-4 tasty-item">
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                            <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                            <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1  tasty-button">
+                          <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
+                          <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
+                        </div>
                         </div>
                       </div>
-                      <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
-                        <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
-                      </div>
-                      </div>
+
                     </div>
 
                   </div>
-
                 </div>
-              </div>
-              <!--fride-->
-              <div class="fride my-5" data-aos="fade-right" ref="fride">
-                <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center" >炸物 <span class="fs-6">COLD NOODLES</span></h2>
-                </div>
-                <div class="row" >
-                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('炸物')" :key="product.id">
-                    <div class="card mx-2 my-4">
-                      <img :src="product.imageUrl" alt="" class="slide-img">
-                      <div class="card-body p-3">
-                      <div class="row  mb-4 tasty-item">
-                        <h5 class="card-title col-7 col-md-12 fw-bolder tasty-item-title">{{product.title}}</h5>
-                        <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price">NT$ {{product.price}}</div>
-                          <div class="card-text  text-md end tasty-item-price fs-6">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                  <!--soup-noodle-->
+                <div class="soup-noodle my-5" ref="soup-noodle">
+                  <div class="d-flex justify-content-center">
+                    <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">湯麵 <span class="fs-6">COLD NOODLES</span></h2>
+                  </div>
+                  <div class="row" >
+                    <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('湯麵')" :key="product.id">
+                      <div class="card mx-2 my-4 position-relative">
+                        <div class="slide-hover">
+                          <img :src="product.imageUrl" alt="" class="slide-img">
+                        </div>
+                        <div class="position-absolute top-3 end-5"><div class="position-absolute top-3 end-5"></div></div>
+                        <div class="card-body p-3">
+                        <div class="row  mb-4 tasty-item">
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                            <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                            <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1  tasty-button">
+                          <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
+                          <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
+                        </div>
                         </div>
                       </div>
-                      <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
-                        <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
-                      </div>
 
-                      </div>
                     </div>
 
                   </div>
+                </div>
+                <!--fride-->
+                <div class="fride my-5" data-aos="fade-right" ref="fride">
+                  <div class="d-flex justify-content-center">
+                    <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center" >炸物 <span class="fs-6">COLD NOODLES</span></h2>
+                  </div>
+                  <div class="row" >
+                    <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('炸物')" :key="product.id">
+                      <div class="card mx-2 my-4">
+                        <div class="slide-hover">
+                          <img :src="product.imageUrl" alt="" class="slide-img">
+                        </div>
+                        <div class="card-body p-3">
+                        <div class="row  mb-4 tasty-item">
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                            <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                            <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1  tasty-button">
+                          <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
+                          <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
+                        </div>
 
-                </div>
-              </div>
-              <!--side desh-->
-              <div class="side desh my-5" ref="side-desh">
-                <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">精緻小菜 <span class="fs-6">COLD NOODLES</span></h2>
-                </div>
-                <div class="row" >
-                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('精緻小菜')" :key="product.id">
-                    <div class="card mx-2 my-4">
-                      <img :src="product.imageUrl" alt="" class="slide-img">
-                      <div class="card-body p-3">
-                      <div class="row  mb-4 tasty-item">
-                        <h5 class="card-title col-7 col-md-12 fw-bolder tasty-item-title">{{product.title}}</h5>
-                        <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price">NT$ {{product.price}}</div>
-                          <div class="card-text  text-md end tasty-item-price fs-6">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
                         </div>
                       </div>
-                      <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
-                        <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
-                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <!--side desh-->
+                <div class="side desh my-5" ref="side-desh">
+                  <div class="d-flex justify-content-center">
+                    <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">精緻小菜 <span class="fs-6">COLD NOODLES</span></h2>
+                  </div>
+                  <div class="row" >
+                    <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('精緻小菜')" :key="product.id">
+                      <div class="card mx-2 my-4">
+                        <div class="slide-hover">
+                          <img :src="product.imageUrl" alt="" class="slide-img">
+                        </div>
+                        <div class="card-body p-3">
+                        <div class="row  mb-4 tasty-item">
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                            <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                            <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1  tasty-button">
+                          <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
+                          <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
+                        </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <!--soup-->
-              <div class="soup my-5" ref="soup">
-                <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">湯品 <span class="fs-6">COLD NOODLES</span></h2>
-                </div>
-                <div class="row" >
-                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('湯品')" :key="product.id">
-                    <div class="card mx-2 my-4">
-                      <img :src="product.imageUrl" alt="" class="slide-img">
-                      <div class="card-body p-3">
-                      <div class="row  mb-4 tasty-item">
-                        <h5 class="card-title col-7 col-md-12 fw-bolder tasty-item-title">{{product.title}}</h5>
-                        <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price">NT$ {{product.price}}</div>
-                          <div class="card-text  text-md end tasty-item-price fs-6">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                <!--soup-->
+                <div class="soup my-5" ref="soup">
+                  <div class="d-flex justify-content-center">
+                    <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">湯品 <span class="fs-6">COLD NOODLES</span></h2>
+                  </div>
+                  <div class="row" >
+                    <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in filteredItems('湯品')" :key="product.id">
+                      <div class="card mx-2 my-4">
+                        <div class="slide-hover">
+                          <img :src="product.imageUrl" alt="" class="slide-img">
                         </div>
-                      </div>
-                      <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
-                        <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
-                      </div>
+                        <div class="card-body p-3">
+                        <div class="row  mb-4 tasty-item">
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                            <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
+                            <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1  tasty-button">
+                          <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
+                          <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
+                        </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -178,15 +243,11 @@
           </form>
         </section>
       </div>
-      <section class="tasty-menu-fixed text-center bg-primary my-md-100 mt-5 fixed-right" data-aos="fade-right" style="display:none;">
+      <section class="tasty-menu-fixed" data-aos="fade-right" :class="{ 'show': isMenuFixed }" @click="scrollMeTo">
       <div class="column text-light">
-        <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('cool-noodle')"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
-        <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('soup-noodle')"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>
-        <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('fride')"><div><img src="../../assets/images/fried-chicken.png" alt=""><span class="d-block">炸物</span></div></div>
-        <div class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('side-desh')"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
-        <div  class="col-2 tasty-menu-item border rounded-circle mx-md-1 d-none d-md-block" @click="scrollMeTo('soup')"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>
-      </div>
-    </section>
+        <div class="d-block"><i class="bi bi-arrow-up-square-fill" style="color: #918f59;font-size: 2rem;"></i></div>
+        </div>
+      </section>
     </div>
   </div>
   </div>
@@ -204,7 +265,13 @@ export default {
   data () {
     return {
       products: [],
+      temProducts: [],
+      searchProducts: [],
+      isfilter: true,
+      selectedItem: '',
+      favorites: [],
       lodingItem: '',
+      isMenuFixed: false,
       qty: 1,
       // loding css
       color: '#9cd020',
@@ -217,41 +284,104 @@ export default {
     Loading
   },
   methods: {
-    getProducts () {
+    testItems (category) {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
-          console.log(res)
+          this.isfilter = false
           this.products = res.data.products
+          this.searchProducts = res.data.products
+          this.filteredItems(category)
           this.isLoading = false
-          console.log(this.products)
+          this.selectedItem = category
+          if (category === '涼麵' || category === '湯麵' || category === '炸物' || category === '精緻小菜' || category === '湯品' || category === '熱門') {
+            this.isfilter = true
+            this.title = category
+            if (category === '涼麵') {
+              this.subtitle = 'COLD NOODLES'
+            } else if (category === '湯麵') {
+              this.subtitle = 'SOUP NOODLES'
+            } else if (category === '炸物') {
+              this.subtitle = 'FRIDE'
+            } else if (category === '精緻小菜') {
+              this.subtitle = 'SIDE-DISH'
+            } else if (category === '湯品') {
+              this.subtitle = 'SOUP'
+            }
+            this.products = this.products.filter(item => item.category === category)
+          }
         })
     },
     filteredItems (category) {
-      return this.products.filter(item => item.category === category)
+      this.selectedItem = '全部商品'
+      this.temProducts = this.products.filter(item => item.category === category)
+      return this.temProducts
+    },
+    // 搜尋篩選
+    handleMouseDown () {
+      if (this.$refs.serch.value === '') {
+        return
+      }
+      if (event.keyCode === 13) {
+        this.isfilter = true
+        this.products = Array.from(this.searchProducts.filter(item => {
+          return item.title.indexOf(this.$refs.serch.value) !== -1
+        }))
+        this.$refs.serch.value = ''
+        console.log(this.products)
+      }
+    },
+
+    searchProduct () {
+      if (this.$refs.serch.value === '') {
+        return
+      }
+      this.isfilter = true
+      this.products = Array.from(this.searchProducts.filter(item => {
+        return item.title.indexOf(this.$refs.serch.value) !== -1
+      }))
+      this.$refs.serch.value = ''
     },
     doAjax () {
       this.isLoading = true
     },
-    setMenuFixed () {
-      const menuFixed = document.querySelector('.tasty-menu-fixed')
-      if (window.scrollY > 500) {
-        menuFixed.style.display = 'block'
+    // localsStorage
+    toggleFavorite (productId) {
+      if (this.favorites.includes(productId)) {
+        this.favorites = this.favorites.filter(id => id !== productId)
       } else {
-        menuFixed.style.display = 'none'
+        this.favorites.push(productId)
+      }
+      this.heartClass(productId)
+      localStorage.setItem('favorites', JSON.stringify(this.favorites))
+    },
+
+    heartClass (productId) {
+      return this.favorites.includes(productId) ? 'fa-solid fa-heart fs-5 text-danger' : 'fa-regular fs-5 fa-heart'
+    },
+    setMenuFixed () {
+      if (window.scrollY > 500) {
+        this.isMenuFixed = true
+      } else {
+        this.isMenuFixed = false
       }
     },
-    scrollMeTo (refName) {
-      const element = this.$refs[refName]
-      const top = element.offsetTop - 120
+    scrollMeTo () {
+      const top = window.offsetTop - 120
 
       window.scrollTo(0, top)
     },
     ...mapActions(cartStore, ['addToCart'])
   },
+
   mounted () {
     this.doAjax()
-    this.getProducts()
+    this.testItems('category')
     window.addEventListener('scroll', this.setMenuFixed)
+    this.favorites = JSON.parse(localStorage.getItem('favorites')) || []
+    this.heartClass()
+  },
+  beforeUnmount () {
+    window.removeEventListener('scroll', this.setMenuFixed)
   }
 }
 </script>

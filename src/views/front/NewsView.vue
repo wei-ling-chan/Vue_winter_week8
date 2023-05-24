@@ -18,7 +18,7 @@
     </section>
   </div>
 
-<div class="news bg-primary pt-36 pb-100">
+<div class="news pt-36 pb-100">
   <section class="news-content">
     <div class="container">
 
@@ -51,11 +51,11 @@
 
             <div class="col-12 offset-lg-1 col-lg-8 news-block">
                 <div class="news-block-items news-info px-5 pt-3 shadow">
-                    <h3 class="info-title">即日起加入會員享以下優惠:</h3>
-                    <ol class="info-content pt-3 pb-5">
-                        <li class="info-line">加入會員，即贈小菜一碟</li>
-                        <li class="info-line">加入會員，即可享全品項85折優惠</li>
-                    </ol>
+                    <h3 class="info-title">慶開幕-全館打九折</h3>
+                    <ul class="info-content pt-3 pb-5">
+                        <li class="info-line fw-bold">即日起輸入優惠碼999，全館享9折優惠</li>
+                        <li class="info-line">快！優惠將於5/31截止！優惠不等人，快來享受這美味且經濟實惠的拌麵吧！</li>
+                    </ul>
                 </div>
                 <div class="news-newproduct-all" ref="newsProductAll" :class="{'d-none': !showAll }">
                   <div class="news-newproduct shadow news-block-items d-flex flex-column flex-lg-row" v-for="item in newsProducts" :key="item.id">
@@ -67,7 +67,7 @@
                           </div>
                           <div class="d-flex flex-lg-column head-tags justify-content-between pb-3 pb-lg-0">
                               <div class="content-tag px-3 py-1 py-lg-2 bg-danger text-white shadow">新品上市</div>
-                              <div class="content-date text-end pt-2">2022.9.1</div>
+                              <div class="content-date text-end pt-2">2023.5.1</div>
                           </div>
                       </div>
                       <div class="content-body">
@@ -78,14 +78,17 @@
                 </div>
                 <div class="news-importent news-block-items d-flex shadow" ref="newsImportent" :class="{'d-none': !showImportent }">
                     <div class="p-md-3 px-4 fs-5">
-                       <h4 class="text-danger mb-md-3 fw-bold">9/1 麵鋪子慶周年!! 指定湯麵1元特賣!!</h4>
-                       <p>南洋叻沙湯麵只要1元</p>
-                       <p>限50份，要買要快!</p>
+                       <p class="mb-md-3 fw-bold">目前無重要公告</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+<section class="tasty-menu-fixed" data-aos="fade-right" :class="{ 'show': isMenuFixed }" @click="scrollMeTo">
+  <div class="column text-light">
+    <div class="d-block"><i class="bi bi-arrow-up-square-fill" style="color: #918f59;font-size: 2rem;"></i></div>
+  </div>
 </section>
 </div>
 </template>
@@ -98,7 +101,8 @@ export default {
       newsProducts: [],
       isLoading: false,
       showAll: true,
-      showImportent: true
+      showImportent: true,
+      isMenuFixed: false
     }
   },
   methods: {
@@ -110,7 +114,7 @@ export default {
           this.isLoading = false
           console.log(this.products)
           this.newsProducts = this.products.filter(function (item) {
-            return item.title === '南洋叻沙湯麵' || item.title === '油蔥湯麵'
+            return item.title === '日式擔仔麵' || item.title === '椒香湯拌麵'
           })
           console.log(this.newsProducts)
         })
@@ -126,10 +130,23 @@ export default {
         this.showAll = true
         this.showImportent = false
       }
+    },
+    setMenuFixed () {
+      if (window.scrollY > 500) {
+        this.isMenuFixed = true
+      } else {
+        this.isMenuFixed = false
+      }
+    },
+    scrollMeTo () {
+      const top = window.offsetTop - 120
+
+      window.scrollTo(0, top)
     }
   },
   mounted () {
     this.filterNewsProducts()
+    window.addEventListener('scroll', this.setMenuFixed)
   }
 }
 </script>

@@ -1,6 +1,48 @@
+//commom
+.tasty-menu-fixed{  
+  display: none; 
+  position: fixed;
+  bottom: 5%;
+  right: 1%;    
+  background-color: rgba(255, 255, 255, 0);
+  // padding: 10px;
+  border-radius: 10px; 
+  img{      
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;     
+  }
+  .tasty-menu-item{
+    width: 50px;
+    height: 50px;
+    font-size: 10px;
+  background-color: $info;
+  &:hover{
+  background-color: black;
+ }
+  // &.active{
+  //   background-color: black;
+  // }
+  }       
+}
+.tasty-menu-fixed.show{
+  display: block;
+}
 .tasty{
   .banner-products{
     background-image: url(./images/tasty-banner.jpg);
+  }
+  .fa-heart:hover{
+    color: #FF69B4;
+    
+  } 
+  .fa-heart{
+    &.active{
+      color: rgb(255, 235, 59);
+    }
+  } 
+  .fa-solid.fa-heart {
+    color: #f61313;
   }
   .tasty-menu{    
     img{      
@@ -16,57 +58,32 @@
     &:hover{
     background-color: black;
    }
+   &.active{
+      background-color: black;
+    }   
     }    
   }
-  .tasty-menu-fixed{   
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    // width: 100px;
-    // height: 100px;
-    // background-color: #fff;
-    background-color: rgba(255, 255, 255, 0);
-    // padding: 10px;
-    border-radius: 10px; 
-    img{      
-      width: 20px;
-      height: 20px;
-      margin-top: 5px;     
-    }
-    .tasty-menu-item{
-      width: 50px;
-      height: 50px;
-      font-size: 10px;
-    background-color: $info;
-    &:hover{
-    background-color: black;
-   }
-    }    
-  }
-  .tasty-list{
-    
-    .card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .card-body{
-        width: 90%;
+  
+  .tasty-list{  
+    .card{
+      .slide-hover{
+        &:hover{
+          overflow: hidden;
+        }
+      }  
+      .slide-img{        
+        &:hover{
+          transform: scale(1.2);
+          transition: all 0.5s;          
+        }
       }
-    }
-
-    .slide-img {    
-      width: 100%;
-      object-fit: cover;
-      object-position: center;     
-      aspect-ratio: 16/11;      
-    }
+    }    
     .tasty-item-title{
       font-size: 24px;
     }
     .tasty-item-price,.tasty-button{
       font-size: 20px;
-    }    
+    }     
   }
 }
  
@@ -107,6 +124,13 @@
         padding-left: 8px;
         padding-right: 8px;
       }
+    }
+  }
+ }
+ @include media-breakpoint-down(md){
+  .tasty-list{
+    .form-search{
+      width: 50% !important;
     }
   }
  }

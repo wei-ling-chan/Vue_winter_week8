@@ -18,7 +18,7 @@
     </section>
   </div>
 
-  <div class="about bg-primary">
+  <div class="about">
   <div class="container pb-4">
     <section class="about-welcome py-md-100">
       <!--pc-->
@@ -32,7 +32,7 @@
     </section>
     <section class="about-focus mb-md-100">
       <h2 class="text-center mb-md-6 mb-4 title-line mx-auto">我們的理念<img src="/src/assets/images/news-leaf.png" alt="" class="about-focus-img1 me-md-4"></h2>
-      <div class="row mb-md-80">
+      <div class="row mb-6 mb-md-80">
         <div class="col-md-7">
           <div class="px-md-4  focus-img">
             <img src="/src/assets/images/about-focus1.jpg" alt="">
@@ -95,12 +95,39 @@
         <div class="col-md-4 d-flex justify-content- align-items-end mt-2"><div class="px-md-2 pt-2 pb-3"><h1 class="m-md-0 mb-md-3 h4">麵鋪子</h1><img src="/src/assets/images/seal.jpg" alt="" class="about-delicious-seal"></div><p class="px-md-80 px-lg-3 py-md-3  about-delicious-creative">持續創新，<br>我們會不定期推出新口味 !</p></div>
       </div>
     </section>
+    <section class="tasty-menu-fixed" data-aos="fade-right" :class="{ 'show': isMenuFixed }" @click="scrollMeTo">
+      <div class="column text-light">
+        <div class="d-block"><i class="bi bi-arrow-up-square-fill" style="color: #918f59;font-size: 2rem;"></i></div>
+      </div>
+    </section>
   </div>
 </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      isMenuFixed: false
+    }
+  },
+  methods: {
+    setMenuFixed () {
+      if (window.scrollY > 500) {
+        this.isMenuFixed = true
+      } else {
+        this.isMenuFixed = false
+      }
+    },
+    scrollMeTo () {
+      const top = window.offsetTop - 120
+
+      window.scrollTo(0, top)
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.setMenuFixed)
+  }
 }
 </script>
 

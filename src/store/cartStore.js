@@ -14,7 +14,6 @@ export default defineStore('cart', {
     getCart () {
       axios.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then(res => {
-          console.log(45646)
           this.storeCarts = res.data.data.carts
           this.cart = res.data.data
           console.log('pinia', this.cart)
@@ -22,7 +21,6 @@ export default defineStore('cart', {
           console.log(this.cartsLength)
         })
         .catch((err) => {
-          console.log(1322)
           alert(err.response.data.message)
         })
     },

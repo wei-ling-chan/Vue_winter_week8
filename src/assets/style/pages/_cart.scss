@@ -6,7 +6,11 @@
  .cart-timeline{
   .bg-dark {
     background-color: #1C1C1C;
-  }  
+  }    
+  // .table-striped{
+  //   background-color: #009100;
+  // }
+
   // .timeline {
   //   position: relative;
   //   width: 70%;
@@ -64,12 +68,35 @@
   //     }
   //   }
   // }
-  
+  //cartOrder
+  .form-control, .form-control:focus {
+    border-color: #FFFFFF;
+    background-color: transparent;
+    color: #C1C1C1;
+  }
+  .inputTime, .inputTime:focus {
+    border-color: #FFFFFF;
+    background-color: transparent;
+    color: #C1C1C1;
+  }
+  .datepicker-cell:not(.disabled):hover {
+    background-color: #e8e8e8;
+  }
+  .datepicker-cell.selected, .datepicker-cell.selected:hover {
+    background-color: #e8e8e8;
+    color: #000;
+  }
  }
+//  .couponBtn{
+//   font-size: 14px;
+//  }
+//  .form-control::placeholder {
+//   font-size: 14px;
+// }
  .text-decoration-line-through {
   text-decoration: line-through;
-  text-decoration-color: 	#009100 !important; 
-  text-decoration-thickness: 2px !important;
+  text-decoration-color:block !important; 
+  text-decoration-thickness: 1.5px !important;
 }
 }
 

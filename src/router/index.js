@@ -46,9 +46,19 @@ const routes = [
         component: () => import('../views/front/NewsView.vue')
       },
       {
+        path: 'search',
+        name: 'search',
+        component: () => import('../views/front/SearchView.vue')
+      },
+      {
         path: 'checkOrder/:orderId',
         name: 'checkOrder',
         component: () => import('../views/front/checkOrder.vue')
+      },
+      {
+        path: 'myStorage',
+        name: 'myStorage',
+        component: () => import('../views/front/myStorage.vue')
       }
     ]
   },
@@ -87,7 +97,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  linkActiveClass: 'active',
+  linkActiveClass: 'router-link-exact-active router-link-active', // 'active',
   routes
 })
 

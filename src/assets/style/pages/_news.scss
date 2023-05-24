@@ -54,9 +54,11 @@
       list-style: none;
       li{
           border-bottom: 1px solid #6e6565;
-          .list-group-item{
-              background-color: #ebdabc;
-              border: 0px;
+          &:hover{
+            color: brown;
+          }
+          .list-group-item{            
+              border: 0px;              
           }
       }
   }
