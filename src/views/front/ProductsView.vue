@@ -1,5 +1,5 @@
 <!-- noodle開始 -->
-<template>
+<!-- <template>
   <loading v-model:active="isLoading"
           :can-cancel="true"
           :color="color"
@@ -13,12 +13,11 @@
           <div class="col-md-6 col-12  offset-md-3 banner-title position-absolute">
             <h2 class="text-light"><span class="banner-delicious-title">美味</span>專區</h2>
             <p class="text-light banner-subtitle">DELICIOUS ZONE</p>
-            <!-- <img src="../../assets/images/tasty-banner.jpg" alt=""> -->
           </div>
           <div class="col-md-10 col-12 banner-info position-absolute">
-            <!--pc-->
+
             <p class="text-light offset-md-5 d-none d-md-block">採用天然新鮮食材精心製作，呈現美味。</p>
-            <!--mobile-->
+
             <p class="text-light offset-md-5 d-block d-md-none banner-info-mobile">採用天然新鮮食材精心製作，<br>呈現美味。</p>
           </div>
         </div>
@@ -43,7 +42,7 @@
                 <input type="text" class="form-control form-search border-2 border-secondary" name="keyword" placeholder="搜尋產品"  ref="serch" v-on:keydown.enter.prevent="handleMouseDown" style="width: 20%;">
                 <button type="button" class="btn"><i class="bi bi-search" @click="searchProduct"></i></button>
             </div>
-                  <!--filter product-->
+
               <div class="filter-product my-5" ref="filter-product" v-if="isfilter">
                 <div class="d-flex justify-content-center">
                 </div>
@@ -73,9 +72,9 @@
                   </div>
                 </div>
               </div>
-              <!-- all -->
+
               <div v-else>
-                <!--cool-noodle-->
+
                 <div class="cold-noodle my-5" ref="cold-noodle">
                   <div class="d-flex justify-content-center">
                     <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">涼麵 <span class="fs-6">COLD NOODLES</span></h2>
@@ -109,7 +108,7 @@
 
                   </div>
                 </div>
-                  <!--soup-noodle-->
+
                 <div class="soup-noodle my-5" ref="soup-noodle">
                   <div class="d-flex justify-content-center">
                     <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">湯麵 <span class="fs-6">COLD NOODLES</span></h2>
@@ -143,7 +142,7 @@
 
                   </div>
                 </div>
-                <!--fride-->
+
                 <div class="fride my-5" data-aos="fade-right" ref="fride">
                   <div class="d-flex justify-content-center">
                     <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center" >炸物 <span class="fs-6">COLD NOODLES</span></h2>
@@ -177,7 +176,7 @@
 
                   </div>
                 </div>
-                <!--side desh-->
+
                 <div class="side desh my-5" ref="side-desh">
                   <div class="d-flex justify-content-center">
                     <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">精緻小菜 <span class="fs-6">COLD NOODLES</span></h2>
@@ -208,7 +207,7 @@
                     </div>
                   </div>
                 </div>
-                <!--soup-->
+
                 <div class="soup my-5" ref="soup">
                   <div class="d-flex justify-content-center">
                     <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">湯品 <span class="fs-6">COLD NOODLES</span></h2>
@@ -251,13 +250,16 @@
     </div>
   </div>
   </div>
+</template> -->
+<template>
+  {{ products }}
+
 </template>
 
 <script>
 // loading
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/css/index.css'
-// import { RouterLink } from 'vue-router'
+// import Loading from 'vue-loading-overlay'
+// import 'vue-loading-overlay/dist/css/index.css'
 import { mapActions } from 'pinia'
 import cartStore from '../../store/cartStore.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
@@ -280,9 +282,9 @@ export default {
       loader: 'bars'
     }
   },
-  components: {
-    Loading
-  },
+  // components: {
+  //   Loading
+  // },
   methods: {
     testItems (category) {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
