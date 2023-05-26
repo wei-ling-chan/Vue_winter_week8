@@ -1,11 +1,11 @@
 <!-- noodle開始 -->
-<!-- <template>
-  <loading v-model:active="isLoading"
+<template>
+  <!-- <loading v-model:active="isLoading"
           :can-cancel="true"
           :color="color"
           :on-cancel="onCancel"
           :loader="loader"
-          :is-full-page="fullPage"/>
+          :is-full-page="fullPage"/> -->
   <div class="tasty pb-36">
     <section class="banner banner-products">
       <div class="banner-title h-100">
@@ -37,13 +37,13 @@
           </div>
         </section>
         <section class="tasty-list">
-          <form action="tastyDetail2.html">
+          <!-- <form action="tastyDetail2.html"> -->
             <div class="d-flex justify-content-end mt-7">
                 <input type="text" class="form-control form-search border-2 border-secondary" name="keyword" placeholder="搜尋產品"  ref="serch" v-on:keydown.enter.prevent="handleMouseDown" style="width: 20%;">
                 <button type="button" class="btn"><i class="bi bi-search" @click="searchProduct"></i></button>
             </div>
-
-              <div class="filter-product my-5" ref="filter-product" v-if="isfilter">
+            <div>test2</div>
+              <!-- <div class="filter-product my-5" ref="filter-product">
                 <div class="d-flex justify-content-center">
                 </div>
                 <div class="row" >
@@ -71,9 +71,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
-              <div v-else>
+              <div>
 
                 <div class="cold-noodle my-5" ref="cold-noodle">
                   <div class="d-flex justify-content-center">
@@ -239,7 +239,7 @@
                   </div>
                 </div>
               </div>
-          </form>
+          <!-- </form> -->
         </section>
       </div>
       <section class="tasty-menu-fixed" data-aos="fade-right" :class="{ 'show': isMenuFixed }" @click="scrollMeTo">
@@ -250,10 +250,6 @@
     </div>
   </div>
   </div>
-</template> -->
-<template>
-  {{ products }}
-
 </template>
 
 <script>
