@@ -42,8 +42,8 @@
                 <input type="text" class="form-control form-search border-2 border-secondary" name="keyword" placeholder="搜尋產品"  ref="serch" v-on:keydown.enter.prevent="handleMouseDown" style="width: 20%;">
                 <button type="button" class="btn"><i class="bi bi-search" @click="searchProduct"></i></button>
             </div>
-            <div>test2</div>
-              <!-- <div class="filter-product my-5" ref="filter-product">
+            <div>test3</div>
+              <div class="filter-product my-5" ref="filter-product">
                 <div class="d-flex justify-content-center">
                 </div>
                 <div class="row" >
@@ -71,9 +71,9 @@
                     </div>
                   </div>
                 </div>
-              </div> -->
+              </div>
 
-              <div>
+              <!-- <div>
 
                 <div class="cold-noodle my-5" ref="cold-noodle">
                   <div class="d-flex justify-content-center">
@@ -238,7 +238,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
           <!-- </form> -->
         </section>
       </div>
