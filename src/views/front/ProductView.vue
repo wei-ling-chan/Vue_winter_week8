@@ -68,7 +68,7 @@
           <p class="h5 text-center mb-4">客戶須知:</p>
           <ul class="ps-0 ps-md-4">
             <li class="py-2">1.線上訂購預約時間：如果您透過線上訂購進行當日預約，請預留約20分鐘的時間，我們將為您準備好餐點，以確保順利取餐。</li>
-            <li class="py-2">2.麵體與湯類分開包裝：為了提供良好的使用體驗，我們將麵體和湯類分開包裝，確保麵食的口感和湯汁的風味保持最佳狀態。</li>
+            <li class="py-2">2.外袋包裝:為了提供良好的使用體驗，我們將麵體和湯類分開包裝，確保麵食的口感和湯汁的風味保持最佳狀態。</li>
             <li class="py-2">3.新鮮煮熟麵的最佳食用時限：我們建議您盡快食用新鮮煮熟的麵食，以確保最佳的口感和風味。</li>
             <li class="py-2">4.訂購方式：您可以選擇在店內現場訂購，或透過我們的線上訂購系統進行訂購。</li>
             <li class="py-2">5.付款方式：為了您的方便，我們接受現金、Line Pay和信用卡三種付款方式。您可以根據個人偏好選擇最適合您的付款方式。</li>
@@ -96,9 +96,12 @@
       },
       }" class="mySwiper" ref="mySwiper">
             <!-- Additional required wrapper -->
-            <swiper-slide v-for="item in products" :key="item.id">
+            <swiper-slide v-for="item in relatedProducts" :key="item.id">
               <div class="card h-100 justify-content-between">
-                <div class="slide-img mt-auto" :style="{ backgroundImage: `url(${item.imageUrl})` }"></div>
+                <!-- <div class="slide-img mt-auto" :style="{ backgroundImage: `url(${item.imageUrl})` }"></div> -->
+                <div class="slide-hover">
+                  <img :src="item.imageUrl" alt="" class="slide-img">
+                </div>
                 <div class="card-body h-100 d-flex flex-column justify-content-between">
                   <div>
                     <h4 class="card-title">{{item.title}}</h4>
@@ -147,6 +150,7 @@ export default {
     return {
       modules: [Navigation, Autoplay],
       products: [],
+      relatedProducts: [],
       product: {
         qty: 1
       },
@@ -161,23 +165,31 @@ export default {
     Swiper, SwiperSlide, Loading
   },
   methods: {
-    getProducts () {
-      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
-        .then((res) => {
-          console.log(res)
-          this.products = res.data.products
-          console.log(this.products)
-        })
-    },
     getProduct () {
       console.log(this.$route.params)
       const { id } = this.$route.params
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/product/${id}`)
         .then(res => {
-          console.log(res.data.product)
+          // console.log(res.data.product)
           this.product = res.data.product
+          this.getRelatedProducts()
           this.isLoading = false
         })
+    },
+    getProducts () {
+      this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
+        .then((res) => {
+          this.products = res.data.products
+          this.isLoading = false
+        })
+    },
+    getRelatedProducts () {
+      this.products.forEach((item) => {
+        // console.log(item.category, this.product.category)
+        if (item.category === this.product.category && item.id !== this.product.id) {
+          this.relatedProducts.push(item)
+        }
+      })
     },
     doAjax () {
       this.isLoading = true
@@ -197,8 +209,8 @@ export default {
   },
   mounted () {
     this.doAjax()
-    this.getProducts()
     this.getProduct()
+    this.getProducts()
   }
 }
 </script>

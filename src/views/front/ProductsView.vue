@@ -1,11 +1,11 @@
 <!-- noodle開始 -->
 <template>
-  <!-- <loading v-model:active="isLoading"
+  <loading v-model:active="isLoading"
           :can-cancel="true"
           :color="color"
           :on-cancel="onCancel"
           :loader="loader"
-          :is-full-page="fullPage"/> -->
+          :is-full-page="fullPage"/>
   <div class="tasty pb-36">
     <section class="banner banner-products">
       <div class="banner-title h-100">
@@ -37,16 +37,6 @@
           </div>
         </section>
         <section class="tasty-list">
-          <div v-for="(catagoryProducts,catagory) in combiProducts" :key="catagory">
-            <div class="d-flex justify-content-center">
-              <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center"></h2>
-            </div>
-            {{ title_map[catagory]}}
-            <div v-for= "product in catagoryProducts" :key="product.id">
-              {{ product.title }}
-            </div>
-          </div>
-          <!-- <form action="tastyDetail2.html"> -->
             <div class="d-flex justify-content-end mt-7">
                 <input type="text" class="form-control form-search border-2 border-secondary" name="keyword" placeholder="搜尋產品"  ref="serch" v-on:keydown.enter.prevent="handleMouseDown" style="width: 20%;">
                 <button type="button" class="btn"><i class="bi bi-search" @click="searchProduct"></i></button>
@@ -82,42 +72,6 @@
                   </div>
                 </div>
               </div>
-              <!-- 原始版型 -->
-              <!-- <div class="d-flex justify-content-end mt-7">
-                <input type="text" class="form-control form-search border-2 border-secondary" name="keyword" placeholder="搜尋產品"  ref="serch" v-on:keydown.enter.prevent="handleMouseDown" style="width: 20%;">
-                <button type="button" class="btn"><i class="bi bi-search" @click="searchProduct"></i></button>
-            </div>
-              <div class="filter-product my-5" ref="filter-product">
-                <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">{{title}} <span class="fs-6">COLD NOODLES</span></h2>
-                </div>
-                <div class="row" >
-                  <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in products" :key="product.id" >
-
-                    <div class="card mx-2 my-4">
-                      <div class="slide-hover">
-                        <img :src="product.imageUrl" alt="" class="slide-img">
-                      </div>
-                      <div class="card-body p-3">
-                      <div class="mb-4 tasty-item">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                          <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
-                          <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
-                          <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
-                        </div>
-                      </div>
-                      <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
-                        <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
         </section>
       </div>
       <section class="tasty-menu-fixed" data-aos="fade-right" :class="{ 'show': isMenuFixed }" @click="scrollMeTo">
@@ -132,17 +86,15 @@
 
 <script>
 // loading
-// import Loading from 'vue-loading-overlay'
-// import 'vue-loading-overlay/dist/css/index.css'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/css/index.css'
 import { mapActions } from 'pinia'
 import cartStore from '../../store/cartStore.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
-      products: [
-        // { 涼麵: ['經典涼麵', '叉燒涼麵'] }, { 湯麵: ['叉燒涼麵', '南洋叻沙湯麵'] }
-      ],
+      products: [],
       title_map:
       {
         涼麵: 'COLD NOODLE',
@@ -167,9 +119,9 @@ export default {
       loader: 'bars'
     }
   },
-  // components: {
-  //   Loading
-  // },
+  components: {
+    Loading
+  },
   methods: {
     testItems (category) {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
@@ -178,12 +130,8 @@ export default {
           this.products = res.data.products
           this.temProducts = res.data.products
           this.searchProducts = res.data.products
-          // this.filteredItems(category)
           this.isLoading = false
           this.products = this.products.filter(item => item.category !== '熱門')
-          console.log(545)
-          // 00000000000
-
           this.combiProducts = {}
           this.products.forEach((item) => {
             if (!this.combiProducts[item.category]) {
@@ -191,21 +139,6 @@ export default {
             }
             this.combiProducts[item.category].push(item) // 将 item 推入相应的数组
           })
-
-          // this.products.forEach((item) => {
-          //   if (item.category === '涼麵') {
-          //     this.combiProducts[0].coolNoodle.push(item)
-          //   } else if (item.category === '湯麵') {
-          //     this.combiProducts[1].soupNoodle.push(item)
-          //   } else if (item.category === '炸物') {
-          //     this.combiProducts[3].fride.push(item)
-          //   } else if (item.category === '精緻小菜') {
-          //     this.combiProducts[2].sideDesh.push(item)
-          //   } else if (item.category === '湯品') {
-          //     this.combiProducts[4].soup.push(item)
-          //   }
-          // })
-          console.log(this.combiProducts)
         })
     },
     filteredItems (categoryName) {
@@ -292,12 +225,6 @@ export default {
     },
     ...mapActions(cartStore, ['addToCart'])
   },
-  // computed: {
-  //   deleteHot () {
-  //     this.products = this.products.filter(item => item.category !== '熱門')
-  //     return 123
-  //   }
-  // },
   mounted () {
     this.doAjax()
     this.testItems('category')
