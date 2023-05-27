@@ -29,8 +29,8 @@
         <section class="tasty-menu text-center my-md-100 mt-5" data-aos="fade-right">
           <div class="row text-light justify-evenly justify-content-sm-center ps-4">
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3 d-flex justify-content-center align-items-center" @click="filteredItems('')" :class="{ 'active': selectedItem === '全部商品' }"><div>全部商品</div></div>
-            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="filteredItems('涼麵')" :class="{ 'active': selectedItem === '涼麵' }"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="filteredItems('湯麵')" :class="{ 'active': selectedItem === '湯麵' }"><div><img src="../../assets/images/chinese-food.png" alt=""><span class="d-block">湯麵</span></div></div>
+            <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="filteredItems('涼麵')" :class="{ 'active': selectedItem === '涼麵' }"><div><img src="../../assets/images/noodles2.png" alt=""><span class="d-block">涼麵</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="filteredItems('炸物')" :class="{ 'active': selectedItem === '炸物' }"><div><img src="../../assets/images/fried-chicken.png" alt=""><span class="d-block">炸物</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="filteredItems('精緻小菜')" :class="{ 'active': selectedItem === '精緻小菜' }"><div><img src="../../assets/images/skewer.png" alt=""><span class="d-block">小菜</span></div></div>
             <div class="col-2 tasty-menu-item border rounded-circle mx-md-3" @click="filteredItems('湯品')" :class="{ 'active': selectedItem === '湯品' }"><div><img src="../../assets/images/soup.png" alt=""><span class="d-block">湯品</span></div></div>

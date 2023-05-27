@@ -215,7 +215,7 @@
           spaceBetween: 20,
         },
         967: {
-          slidesPerView: 2,
+          slidesPerView: 3,
           spaceBetween: 20,
         },
         1500: {

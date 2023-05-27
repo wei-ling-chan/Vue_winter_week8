@@ -1,7 +1,8 @@
 <template>
-  <div class="d-flex flex-column align-items-center">
-      <h1 style="margin-top: 3rem;margin-bottom: 3rem;">這是登入畫面</h1>
-    <form id="form" class="form-signin" style="width: 50%;">
+  <div class="login d-flex flex-column align-items-center mb-4">
+    <div style="height: 20vh;"></div>
+      <h1 style="margin-top: 3rem;margin-bottom: 3rem;">後台登入</h1>
+    <form id="form" class="form-signin w-25">
       <div class="form-floating mb-3">
         <input type="email" class="form-control email" id="username"
           placeholder="name@example.com" required autofocus v-model="user.username">
