@@ -43,7 +43,7 @@
             </div>
               <div class="filter-product my-5" ref="filter-product" v-for="(catagoryProducts,catagory) in combiProducts" :key="catagory">
                 <div class="d-flex justify-content-center">
-                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">{{ catagory }} <span class="fs-6">{{ title_map[catagory]}}</span></h2>
+                  <h2 class="tasty-tite fs-3 border-3 border-start border-dark px-2 text-center">{{ catagory }} <span class="fs-6">{{ title_map[catagory] }}</span></h2>
                 </div>
                 <div class="row" >
                   <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for= "product in catagoryProducts" :key="product.id" >
@@ -55,16 +55,16 @@
                       <div class="card-body p-3">
                       <div class="mb-4 tasty-item">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                          <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                          <h5 class="card-title fw-bolder tasty-item-title d-block">{{ product.title }}</h5>
                           <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
                         </div>
                         <div class="d-flex justify-content-between">
-                          <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
-                          <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                          <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{ product.origin_price }}</span></div>
+                          <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{ product.price }}</div>
                         </div>
                       </div>
                       <div class="d-flex justify-content-between mb-1  tasty-button">
-                        <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
+                        <router-link :to="`/product/${ product.id }`" class="d-md-block btn btn-outline-info more py-2 ms-auto me-2">查看更多</router-link>
                         <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
                       </div>
                       </div>
@@ -135,9 +135,9 @@ export default {
           this.combiProducts = {}
           this.products.forEach((item) => {
             if (!this.combiProducts[item.category]) {
-              this.combiProducts[item.category] = [] // 初始化数组
+              this.combiProducts[item.category] = [] // 初始化
             }
-            this.combiProducts[item.category].push(item) // 将 item 推入相应的数组
+            this.combiProducts[item.category].push(item) // 將 item 推入相應的数組
           })
         })
     },
@@ -148,20 +148,19 @@ export default {
       if (categoryName === '') {
         this.products.forEach((item) => {
           if (!this.combiProducts[item.category]) {
-            this.combiProducts[item.category] = [] // 初始化数组
+            this.combiProducts[item.category] = [] // 初始化
           }
-          this.combiProducts[item.category].push(item) // 将 item 推入相应的数组
+          this.combiProducts[item.category].push(item) // 將 item 推入相应的数组
         })
-        console.log(this.combiProducts)
         return
       }
       // 有選取分類時, 清空combiProducts重取出對應的分類產品
       this.products.forEach((item) => {
         if (categoryName === item.category) {
           if (!this.combiProducts[item.category]) {
-            this.combiProducts[item.category] = [] // 初始化数组
+            this.combiProducts[item.category] = [] // 初始化
           }
-          this.combiProducts[item.category].push(item) // 将 item 推入相应的数组
+          this.combiProducts[item.category].push(item) // 將 item 推入相應的数組
         }
       })
     },
@@ -170,9 +169,7 @@ export default {
       if (this.$refs.serch.value === '') {
         return
       }
-      if (event.keyCode === 13) {
-        this.searchFunction()
-      }
+      this.searchFunction()
     },
 
     searchProduct () {
@@ -187,9 +184,9 @@ export default {
       this.products.forEach((item) => {
         if (item.title.indexOf(this.$refs.serch.value) !== -1) {
           if (!this.combiProducts[item.category]) {
-            this.combiProducts[item.category] = [] // 初始化数组
+            this.combiProducts[item.category] = [] // 初始化
           }
-          this.combiProducts[item.category].push(item) // 将 item 推入相应的数组
+          this.combiProducts[item.category].push(item) // 將 item 推入相應的数組
         }
       })
     },

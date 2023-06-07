@@ -29,12 +29,12 @@
       </thead>
       <tbody>
         <tr v-for="item in product" :key="item.id">
-          <td>{{item.category}}</td>
-          <td>{{item.title}}</td>
-          <td class="text-start">{{item.origin_price}}</td>
-          <td class="text-start">{{item.price}}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.title }}</td>
+          <td class="text-start">{{ item.origin_price }}</td>
+          <td class="text-start">{{ item.price }}</td>
           <td>
-            <span class="text-success">{{item.is_enabled ? '啟用':'未啟用'}}</span>
+            <span class="text-success">{{ item.is_enabled ? '啟用':'未啟用' }}</span>
 
           </td>
           <td>
@@ -82,7 +82,6 @@ export default {
         .then(res => {
           this.product = res.data.products
           this.page = res.data.pagination
-          console.log(this.product)
         })
         .catch(error => {
           console.dir(error)
@@ -91,13 +90,12 @@ export default {
     // 新增 post
     updateProduct (item) {
       this.template = item
-      console.log('updateProduct')
+
       let httpMethod = 'post'
       let api = `${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/product`
       // 編輯 put
       if (!this.isNew) {
         httpMethod = 'put'
-        console.log(this.template)
         api = `${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/product/${this.template.id}`
       }
       this.$http[httpMethod](api, { data: this.template })
@@ -122,8 +120,8 @@ export default {
           this.getProduct()
         })
         .catch(error => {
-          alert('刪除失敗')
           console.dir(error)
+          alert('刪除失敗')
         })
     },
 

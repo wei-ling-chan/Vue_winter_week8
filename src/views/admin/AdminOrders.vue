@@ -14,7 +14,7 @@
     <tbody>
       <template v-for="(adminOrder, key) in adminOrders" :key="key+'12345'">
         <tr v-if="adminOrders.length" :class="{ 'text-secondary': !adminOrder.is_paid }">
-          <td>{{formattedDate(adminOrder.create_at, 'yyyy-MM-dd') }}</td>
+          <td>{{ formattedDate(adminOrder.create_at, 'yyyy-MM-dd') }}</td>
           <td><span v-text="adminOrder.user.email" v-if="adminOrder.user"></span></td>
           <td>
             <ul class="list-unstyled">
@@ -91,9 +91,7 @@ export default {
       this.currentPage = currentPage
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/orders?page=${currentPage}`)
         .then(res => {
-          console.log(res.data.success)
           this.adminOrders = res.data.orders
-          console.log(this.adminOrders)
           this.formattedDate()
         })
         .catch((err) => {
@@ -101,21 +99,17 @@ export default {
         })
     },
     updatePaid (adminOrder) {
-      console.log(adminOrder.is_paid)
-      // this.isLoading = true
       this.paid = {
         is_paid: adminOrder.is_paid
       }
       this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/order/${adminOrder.id}`, { data: this.paid })
         .then((res) => {
           alert(res.data.message)
-          console.log('updatePaid', res.data)
           this.orderComponent.hideModal()
           this.getAdminOrders()
         })
     },
     delAdminOrder () {
-      console.log(this.tempOrder.id)
       this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/order/${this.tempOrder.id}`)
         .then(res => {
           alert(res.data.message)
@@ -128,7 +122,6 @@ export default {
     },
     openModal (item) {
       this.tempOrder = { ...item }
-      console.log(this.$refs.orderModal)
       this.orderComponent = this.$refs.orderModal
       this.orderComponent.openModal()
     },
@@ -138,7 +131,7 @@ export default {
       this.delorderComponent.openModal()
     },
     formattedDate (timestamp, format) {
-      const date = new Date(timestamp * 1000) // 将 Unix 时间戳转换为 JavaScript Date 对象
+      const date = new Date(timestamp * 1000) // 將 Unix 時間戳轉換為 JavaScript Date
       return date.toLocaleDateString(undefined, { dateFormat: format })
     }
   },

@@ -10,9 +10,7 @@ export default defineStore('productStore', {
     getProducts () {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
-          console.log(res)
           this.products = res.data.products
-          console.log(this.products)
         })
     }
   },

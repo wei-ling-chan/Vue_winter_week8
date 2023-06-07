@@ -32,8 +32,8 @@ const routes = [
       },
       {
         path: 'cartFront',
-        name: 'cartFront',
-        component: () => import('../views/front/cartFontView.vue')
+        name: 'CartFont',
+        component: () => import('../views/front/CartFont.vue')
       },
       {
         path: 'login',
@@ -46,19 +46,14 @@ const routes = [
         component: () => import('../views/front/NewsView.vue')
       },
       {
-        path: 'search',
-        name: 'search',
-        component: () => import('../views/front/SearchView.vue')
-      },
-      {
         path: 'checkOrder/:orderId',
         name: 'checkOrder',
         component: () => import('../views/front/checkOrder.vue')
       },
       {
         path: 'myStorage',
-        name: 'myStorage',
-        component: () => import('../views/front/myStorage.vue')
+        name: 'MyStorage',
+        component: () => import('../views/front/MyStorage.vue')
       }
     ]
   },

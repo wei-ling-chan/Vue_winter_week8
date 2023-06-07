@@ -154,15 +154,15 @@
             <swiper-slide v-for="item in filteredItems('熱門')" :key="item.id">
               <div class="card h-100 justify-content-between rounded-0 border border-3 border-dark">
                 <div class="slide-hover w-100">
-                  <div class="slide-img mt-auto rounded-0" :style="{ backgroundImage: `url(${item.imageUrl})`}" ></div>
+                  <div class="slide-img mt-auto rounded-0" :style="{ backgroundImage: `url(${ item.imageUrl })`}" ></div>
                 </div>
                 <div class="card-body h-100 w-100 d-flex flex-column justify-content-between">
                   <div>
-                    <h4 class="card-title" data-aos="fade-right">{{item.title}}  <span class="badge bg-info fs-12">熱門</span></h4>
-                    <p class="card-text text-truncate w-100">{{item.content}}</p>
+                    <h4 class="card-title" data-aos="fade-right">{{ item.title }}  <span class="badge bg-info fs-12">熱門</span></h4>
+                    <p class="card-text text-truncate w-100">{{ item.content }}</p>
                   </div>
                   <div>
-                    <p class="card-text fs-5">NT <span class="text-dangers fs-5">${{item.price}}</span></p>
+                    <p class="card-text fs-5">NT <span class="text-dangers fs-5">${{ item.price }}</span></p>
                     <a href="#" class="btn btn-dark text-light w-100" @click.prevent="addToCart(item.id,qty)"><i class="fa-solid fa-cart-shopping"></i> 加入購物車</a>
                   </div>
                 </div>
@@ -204,7 +204,7 @@
       <div class="position-absolute news-item-in" style="width:100%;bottom:2%;">
         <div class="d-flex justify-content-around w-100">
           <div class="news-swiper" style="width: 90%;">
-            <swiper  :slidesPerView="4" :spaceBetween="20" :autoHeight="true" :delay="5000"  :loop="true" :navigation="{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}" :modules="modules"
+            <swiper  :slidesPerView="4" :spaceBetween="20" :autoHeight="true" :delay="5000"  :loop="true" :navigation="{ nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev' }" :modules="modules"
             :breakpoints="{0: {slidesPerView: 1,spaceBetween: 10,
         },
         600: {
@@ -288,7 +288,6 @@ import cartStore from '../../store/cartStore.js'
 // loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -354,7 +353,6 @@ export default {
   },
   mounted () {
     this.doAjax()
-    // this.getProducts()
     this.testItems('category')
     window.addEventListener('scroll', this.setMenuFixed)
   }

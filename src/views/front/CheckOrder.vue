@@ -7,7 +7,6 @@
           :is-full-page="fullPage"/>
   <div style="height: 25vh;"></div>
   <div class="cart d-none d-md-block d-flex flex-column align-items-center mb-0 mb-md-7 mt-4 mt-md-7">
-    <!-- <Loading :active="isLoading" :z-index="1060"></Loading> -->
     <div class="mx-auto" style="width: 70%;">
       <!-- 購物流程開始 -->
       <div class="position-relative mx-auto m-4 mb-8" style="width: 50%;" v-if="!order.is_paid">
@@ -26,8 +25,7 @@
         <button type="button" class="position-absolute bg-success text-light boeder border-dark bg-0 top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill fs-7" style="width: 6rem; height:6rem;">填寫訂單</button>
         <button type="button" class="position-absolute bg-success text-light top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill fs-7" style="width: 6rem; height:6rem;">完成訂單</button>
       </div>
-      <!-- <div class="h1 text-center mb-5" v-if="order.is_paid">完成訂單</div> -->
-         <!-- 購物流程結束 -->
+      <!-- 購物流程結束 -->
 
       <!-- 正式開始 -->
           <div class="d-flex justify-content-start align-items-start">
@@ -61,7 +59,7 @@
                             background-position: center;
                             width: 100px
                           "
-                          :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
+                          :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
                         ></div>
                     </td>
                     <td>
@@ -76,7 +74,7 @@
                       {{ item.total }}
                     </td>
                     <td class="text-center" v-if="order.total !==0">
-                      {{ Math.round(item.total - item.final_total)}}
+                      {{ Math.round(item.total - item.final_total) }}
                     </td>
                   </tr>
                 </template>
@@ -84,7 +82,7 @@
               <tfoot>
                 <tr>
                   <td class="text-center text-info" v-if="order.total !==0">已折扣</td>
-                  <td class="text-center text-info" v-if="order.total !==0">{{order.total}}</td>
+                  <td class="text-center text-info" v-if="order.total !==0">{{ order.total }}</td>
                   <td v-if="order.total !==0"></td>
                   <td class="text-center" style="color: #a64942;" v-if="order.total !==0">金額</td>
                   <td class="text-center" style="color: #a64942;" v-if="order.total !==0">{{ totalSum }}</td>
@@ -97,12 +95,12 @@
             </table>
             <!-- 訂單資訊開始 -->
             <div class=" d-flex flex-column align-items-center ms-4 mb-1 border border-1 border-dark" style="width: 49%;">
-              <div class="text-center fs-6 p-2 bg-dark text-white w-100 border-bottom border-dark">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{localOrder.inOrOut}}</span></div>
+              <div class="text-center fs-6 p-2 bg-dark text-white w-100 border-bottom border-dark">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{ localOrder.inOrOut }}</span></div>
               <table class="table text-start" style="margin-bottom: -1px !important;">
                 <tbody class="fs-6">
                   <tr style="height: 46px;">
                   <th  style="color: #a64942;">取單號</th>
-                  <td  style="color: #a64942;">{{localOrder.orderCount}}</td>
+                  <td  style="color: #a64942;">{{ localOrder.orderCount }}</td>
                 </tr>
                 <tr style="height: 46px;vertical-align:middle;">
                   <th>Email</th>
@@ -143,9 +141,6 @@
             <button class="btn btn-info text-light" @click="payOrder">繼續購物</button>
           </div>
         <!-- 正式結束 -->
-        <!-- <div class="text-end align-self-center mt-7" style="width: 90%;" v-if="order.is_paid">
-          <router-link to="/products" class="nav-link"><button class="btn btn-lg btn-info text-light shopping" style="width: 90%;">繼續購物</button></router-link>
-        </div> -->
     </div>
   </div>
   <!-- 手機板開始 -->
@@ -193,7 +188,7 @@
                       background-position: center;
                       width: 100px
                     "
-                    :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
+                    :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
                   ></div>
               </td>
               <td>
@@ -208,7 +203,7 @@
                 {{ item.total }}
               </td>
               <td class="text-center" v-if="order.total !==0">
-                {{ Math.round(item.total - item.final_total)}}
+                {{ Math.round(item.total - item.final_total) }}
               </td>
             </tr>
           </template>
@@ -216,7 +211,7 @@
         <tfoot>
           <tr>
             <td class="text-center text-info" v-if="order.total !==0">已折扣</td>
-            <td class="text-center text-info" v-if="order.total !==0">{{order.total}}</td>
+            <td class="text-center text-info" v-if="order.total !==0">{{ order.total }}</td>
             <td v-if="order.total !==0"></td>
             <td class="text-center" style="color: #a64942;" v-if="order.total !==0">金額</td>
             <td class="text-center" style="color: #a64942;" v-if="order.total !==0">{{ totalSum }}</td>
@@ -229,12 +224,12 @@
       </table>
       <!-- 訂單資訊開始 -->
       <div class=" d-flex flex-column align-items-center my-3 border border-1 border-dark">
-        <div class="text-center fs-6 p-2 bg-dark text-white w-100 border-bottom border-dark">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{localOrder.inOrOut}}</span></div>
+        <div class="text-center fs-6 p-2 bg-dark text-white w-100 border-bottom border-dark">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{ localOrder.inOrOut }}</span></div>
         <table class="table text-start" style="margin-bottom: -1px !important;">
           <tbody class="fs-6">
             <tr style="height: 46px;">
             <th  style="color: #a64942;">取單號</th>
-            <td  style="color: #a64942;">{{localOrder.orderCount}}</td>
+            <td  style="color: #a64942;">{{ localOrder.orderCount }}</td>
           </tr>
           <tr style="height: 46px;vertical-align:middle;">
             <th>Email</th>
@@ -312,7 +307,6 @@ export default {
       this.$http.get(url).then((response) => {
         this.order = response.data.order
         this.orderProductsObj = response.data.order.products
-        console.log(this.orderProductsObj)
         this.isLoading = false
       }).catch((error) => {
         this.$httpMessageState(error.response, '錯誤訊息')
@@ -320,9 +314,8 @@ export default {
     },
     payOrder () {
       const url = `${VITE_APP_URL}/api/${VITE_APP_PATH}/pay/${this.orderId}`
-      // this.isLoading = true
+
       this.$http.post(url).then(() => {
-        // this.isLoading = false
         this.getOrder()
         Swal.fire({
           // sweealert2
@@ -346,13 +339,11 @@ export default {
           denyButtonTextColor: '#fff'
         })
       }).catch((error) => {
-        // this.isLoading = false
         this.$httpMessageState(error.response, '錯誤訊息')
       })
     },
     getorderinfo () {
       this.localOrder = JSON.parse(localStorage.getItem('order'))
-      console.log(this.localOrder)
     }
   },
   computed: {

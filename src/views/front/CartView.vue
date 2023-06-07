@@ -7,7 +7,6 @@
           :is-full-page="fullPage"/>
   <div style="height: 25vh;"></div>
   <div class="cart d-flex flex-column align-items-center mb-5 mb-md-8 mt-4">
-    <!-- <h1 class="my-36 mb-5">購物車</h1> -->
       <table class="d-none d-md-block"  style="width: 70%;" v-if="cart.carts && Object.keys(cart.carts).length > 0">
         <!-- 購物流程開始 -->
         <div class="position-relative mx-auto m-4 mb-7" style="width: 50%;">
@@ -59,11 +58,6 @@
                   <div class="text-success fs-7" v-if="item.coupon">已套用</div>
                 </td>
                 <td>
-                  <!-- <div class="input-group input-group-sm">
-                    <select name="" id="" class="form-select" v-model="item.qty" @change="updateCart(item)" :disabled="lodingItem === item.id">
-                      <option :value="i" v-for="i in 20" :key="i+'45621'">{{i}}</option>
-                    </select>
-                  </div> -->
                   <div class="input-group" style="width: 180px;">
                     <button class="btn btn-outline-secondary rounded-0 px-2" type="button" @click.prevent="updateCart(item,item.qty-1)"><i class="bi bi-dash-lg"></i></button>
                     <input type="text" class="form-control text-center"  :value="item.qty"  @change="updateCart(itemitem.qty)" placeholder="" aria-label="Example text with two button addons" readonly>
@@ -74,7 +68,7 @@
                   {{ item.total }}
                 </td>
                 <td class="text-center" v-if="cart.total !== cart.final_total">
-                  {{ Math.round(item.total - item.final_total)}}
+                  {{ Math.round(item.total - item.final_total) }}
                 </td>
                 <td class="text-center">
                   <button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="deleteCartItem(item)" :disabled="lodingItem === item.id">
@@ -184,7 +178,7 @@
                     </div>
                     <div class="input-group input-group-sm">
                     <select name="" id="" class="form-select" v-model="item.qty" @change="updateCart(item)" :disabled="lodingItem === item.id">
-                      <option :value="i" v-for="i in 20" :key="i+'45621'">{{i}}</option>
+                      <option :value="i" v-for="i in 20" :key="i+'45621'">{{ i }}</option>
                     </select>
                   </div>
                   </div>
@@ -196,7 +190,7 @@
                     </div>
                     <div class="text-center" v-if="cart.total !== cart.final_total">
 
-                      折扣後金額:{{ Math.round(item.total - item.final_total)}}
+                      折扣後金額:{{ Math.round(item.total - item.final_total) }}
                     </div>
                   </div>
                 </td>
@@ -227,32 +221,6 @@
           </tfoot>
         </table>
         <!-- 手機板優惠碼開始 -->
-        <!-- <div class="d-flex flex-column align-items-betw input-group input-group-sm coupon">
-          <div class="d-flex justify-content-end mb-3">
-            <div class="col-6 col-xl-3 col-md-12 me-2">
-              <input ref="coupon_input"
-                type="text"
-                class="form-control me-3 rounded-0 fs-8"
-                v-model="coupon_code"
-                placeholder="請輸入優惠碼"/>
-            </div>
-            <div class="col-5 col-xl-3 col-md-12">
-              <div class="input-group-append">
-                <button
-                  class="btn btn-outline-secondary me-3 rounded-0 fs-8"
-                  type="button" :disabled="couponApplied"
-                  @click="addCouponCode"
-                  >
-                  {{ couponApplied ? '優惠碼已套用' : '套用優惠碼' }}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-center px-2">
-            <button type="button" class="btn btn-dark rounded-0 fs-8"><router-link to="/products" class="nav-link">繼續購物</router-link></button>
-            <button type="button" class="btn btn-info ms-2 rounded-0 text-white fs-8" @click.prevent="nextCart">下一步</button>
-          </div>
-        </div> -->
         <div class="d-flex flex-column align-items-betw input-group input-group-sm coupon">
           <div class="d-flex justify-content-end mb-3">
             <div class="col-7 col-xl-3 col-md-12 me-2">
@@ -324,7 +292,6 @@ export default {
         product_id: item.product.id,
         qty
       }
-      console.log(data)
       this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`, { data })
         .then(res => {
           Swal.fire({
@@ -366,7 +333,6 @@ export default {
       this.lodingItem = '123'
       this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/carts`)
         .then(res => {
-          console.log(res.data)
           Swal.fire({
             title: '刪除成功!',
             confirmButtonColor: '#7b7d42cc',
@@ -384,15 +350,12 @@ export default {
     },
     // 結帳
     order () {
-      console.log(this.data)
       const orderData = {
         data: this.data
       }
 
       this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/order`, orderData)
         .then(res => {
-          // alert('res.data.message')
-          // console.log(res.data.orderId)
           this.$router.push(`/checkOrder/${res.data.orderId}`)
           this.$refs.form.resetForm()
         })
@@ -407,7 +370,6 @@ export default {
       const data = { code: this.coupon_code }
       this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/coupon`, { data })
         .then(res => {
-          console.log(res.data.data.final_total)
           this.discount_total_price = res.data.data.final_total
           Swal.fire({
             title: '套用成功!',
@@ -420,7 +382,6 @@ export default {
           this.couponApplied = true
           this.$refs.coupon_input.value = ''
           this.coupon_code = ''
-          console.log(this.$refs.coupon_input.value)
           this.getCart()
         })
         .catch((err) => {
@@ -430,7 +391,6 @@ export default {
     },
     // reset表單
     resetForm () {
-      console.log(this.$refs.form)
       this.$refs.form.resetForm()
     },
     // 下一步
@@ -447,13 +407,6 @@ export default {
 
   },
   mounted () {
-    // Swal.fire({
-    //   title: '慶開幕輸入999可折9折',
-    //   confirmButtonColor: '#7b7d42cc',
-    //   icon: 'warning',
-    //   iconColor: 'red',
-    //   confirmButtonText: '確認'
-    // })
     this.getCart()
   }
 }

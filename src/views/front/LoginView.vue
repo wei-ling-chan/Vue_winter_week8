@@ -41,10 +41,8 @@ export default {
       this.$http.post(`${VITE_APP_URL}/v2/admin/signin`, this.user)
         .then(res => {
           const { token, expired } = res.data
-          console.log(token, expired)
           // 儲存cookie
           document.cookie = `hexToken=${token}; expires=${new Date(expired)};`
-          // document.cookie = `hexschool=${token}; expires=${new Date(expired)};`;
 
           // 轉址
           this.$router.push('/admin/products')

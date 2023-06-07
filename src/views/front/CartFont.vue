@@ -71,7 +71,7 @@
                       {{ item.total }}
                     </td>
                     <td class="text-center" v-if="cart.total !== cart.final_total">
-                      {{ Math.round(item.total - item.final_total)}}
+                      {{ Math.round(item.total - item.final_total) }}
                     </td>
                   </tr>
                 </template>
@@ -136,12 +136,6 @@
                     </div>
                     <div class="text-danger">*當天預約，取餐時間需準備20分鐘</div>
                   </div>
-                  <!-- <div class="mb-3">
-                    <label for="address" class="form-label">收件人地址</label>
-                    <v-field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
-                              placeholder="請輸入地址" v-model="data.user.address"></v-field>
-                    <error-message name="地址" class="invalid-feedback"></error-message>
-                  </div> -->
                   <div class="mb-3">
                     <label for="form-select" class="form-label">付款方式</label>
                     <select class="form-select" aria-label="Default select example" ref="payInput">
@@ -153,7 +147,7 @@
                   <div class="mb-3">
                     <label for="message" class="form-label">留言</label>
                     <!-- errors -->
-                    <v-field v-slot="{ field}" v-model="data.message" name="comment" rules="required">
+                    <v-field v-slot="{ field }" v-model="data.message" name="comment" rules="required">
                       <textarea v-bind="field" name="comment" class="form-control"></textarea>
                     </v-field>
                   </div>
@@ -207,7 +201,7 @@
                           background-position: center;
                           width: 100px
                         "
-                        :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
+                        :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
                       ></div>
                   </td>
                   <td>
@@ -227,7 +221,7 @@
                         小計:{{ item.total }}
                       </div>
                       <div class="text-center" v-if="cart.total !== cart.final_total">
-                        折扣後金額:{{ Math.round(item.total - item.final_total)}}
+                        折扣後金額:{{ Math.round(item.total - item.final_total) }}
                       </div>
                     </div>
                   </td>
@@ -295,12 +289,6 @@
                 </div>
                 <div class="text-danger">*當天預約，取餐時間需準備20分鐘</div>
               </div>
-              <!-- <div class="mb-3">
-                <label for="address" class="form-label">收件人地址</label>
-                <v-field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
-                          placeholder="請輸入地址" v-model="data.user.address"></v-field>
-                <error-message name="地址" class="invalid-feedback"></error-message>
-              </div> -->
               <div class="mb-3">
                 <label for="form-select" class="form-label">付款方式</label>
                 <select class="form-select" aria-label="Default select example" ref="payInput">
@@ -312,7 +300,7 @@
               <div class="mb-3">
                 <label for="message" class="form-label">留言</label>
                 <!-- errors -->
-                <v-field v-slot="{ field}" v-model="data.message" name="comment" rules="required">
+                <v-field v-slot="{ field }" v-model="data.message" name="comment" rules="required">
                   <textarea v-bind="field" name="comment" class="form-control"></textarea>
                 </v-field>
               </div>
@@ -374,7 +362,6 @@ export default {
         message: ''
       },
       cart: [],
-      // date: new Date(),
       date,
       payMethos: {
         inOrOut: '',
@@ -395,8 +382,6 @@ export default {
     VField: Field,
     ErrorMessage,
     Loading
-    // VDatePicker
-
   },
   methods: {
     doAjax () {
@@ -407,7 +392,6 @@ export default {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then(res => {
           this.cart = res.data.data
-          console.log(this.cart)
           this.isLoading = false
         })
         .catch((err) => {
@@ -416,7 +400,6 @@ export default {
     },
     // 結帳
     order () {
-      console.log(this.data)
       const orderData = {
         data: this.data
       }
@@ -435,7 +418,6 @@ export default {
     },
     // reset表單
     resetForm () {
-      console.log(this.$refs.form)
       this.$refs.form.resetForm()
     },
     updateIsOut () {
@@ -447,7 +429,6 @@ export default {
     },
     orderinfo () {
       // 選擇內用或外帶
-      console.log(this.$refs.inOut.value)
       this.payMethos.inOrOut = this.$refs.inOut.value
       // 預計外帶取餐時間
       const value = this.$refs.myInput.value

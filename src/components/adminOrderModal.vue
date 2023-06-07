@@ -165,7 +165,7 @@ export default {
       this.$emit('change-status', tempOrder)
     },
     formattedDate (timestamp, format) {
-      const date = new Date(timestamp * 1000) // 将 Unix 时间戳转换为 JavaScript Date 对象
+      const date = new Date(timestamp * 1000) // 將 Unix 時間戳轉換為 JavaScript Date
       return date.toLocaleDateString(undefined, { dateFormat: format })
     }
   },

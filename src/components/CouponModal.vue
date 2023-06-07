@@ -87,7 +87,6 @@ export default {
     },
     // 建立新的優惠卷
     creatCoupon () {
-      console.log(this.isNew)
       this.tempCoupon.due_date = new Date(this.tempCoupon.due_date).getTime() // 將日期轉換為Date對象，再換為時間戳(以毫秒為單位)
       if (this.isNew === true) {
         this.hideModal()
@@ -117,7 +116,6 @@ export default {
       this.couponeEdited.due_date = new Date(this.couponeEdited.due_date).toISOString().slice(0, 10)
 
       this.tempCoupon = this.couponeEdited
-      console.log(this.tempCoupon.due_date)
     }
   },
   mounted () {

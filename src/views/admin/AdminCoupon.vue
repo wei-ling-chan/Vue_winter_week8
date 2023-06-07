@@ -81,7 +81,6 @@ export default {
       } else {
         this.tempCoupon = { ...item }
         this.$refs.couponModal.openModal()
-        console.log(this.tempCoupon)
       }
     },
     delCouponModal (item) {
@@ -91,7 +90,6 @@ export default {
     getCoupons () {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupons`)
         .then(res => {
-          console.log(res.data)
           this.coupons = res.data.coupons
         }).catch(err => {
           console.log(err)

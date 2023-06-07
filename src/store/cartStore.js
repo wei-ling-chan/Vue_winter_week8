@@ -33,8 +33,6 @@ export default defineStore('cart', {
       }
       axios.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`, { data })
         .then(res => {
-          console.log(res.data)
-          // alert('加入購物車成功!')
           Swal.fire({
             title: '加入購物車成功!',
             confirmButtonColor: '#7b7d42cc',
@@ -43,10 +41,8 @@ export default defineStore('cart', {
             confirmButtonText: '確認'
           })
           this.getCart()
-          // this.lodingItem = ''
         })
         .catch((err) => {
-          console.log(err.response)
           alert(err.response)
         })
     }

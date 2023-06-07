@@ -57,13 +57,13 @@
                         <li class="info-line">快！優惠將於5/31截止！優惠不等人，快來享受這美味且經濟實惠的拌麵吧！</li>
                     </ul>
                 </div>
-                <div class="news-newproduct-all" ref="newsProductAll" :class="{'d-none': !showAll }">
+                <div class="news-newproduct-all" ref="newsProductAll" :class="{ 'd-none': !showAll }">
                   <div class="news-newproduct shadow news-block-items d-flex flex-column flex-lg-row" v-for="item in newsProducts" :key="item.id">
                   <div class="pro-img m-lg-4 mx-auto my-4" :style="{ backgroundImage: `url(${item.imageUrl})` }"></div>
                   <div class="pro-content w-100 d-flex flex-column py-lg-4 px-4 pe-lg-4">
                       <div class="content-head d-flex flex-column flex-lg-row justify-content-between pb-lg-3 align-items-center">
                           <div class="content-title pb-4 pb-lg-0">
-                              <span class="h3">{{item.title}}</span>
+                              <span class="h3">{{ item.title }}</span>
                           </div>
                           <div class="d-flex flex-lg-column head-tags justify-content-between pb-3 pb-lg-0">
                               <div class="content-tag px-3 py-1 py-lg-2 bg-danger text-white shadow">新品上市</div>
@@ -71,7 +71,7 @@
                           </div>
                       </div>
                       <div class="content-body">
-                          <p class="h5">{{item.description}}</p>
+                          <p class="h5">{{ item.description }}</p>
                       </div>
                   </div>
                   </div>
@@ -109,14 +109,11 @@ export default {
     filterNewsProducts () {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
-          console.log(res)
           this.products = res.data.products
           this.isLoading = false
-          console.log(this.products)
           this.newsProducts = this.products.filter(function (item) {
             return item.title === '日式擔仔麵' || item.title === '椒香湯拌麵'
           })
-          console.log(this.newsProducts)
         })
     },
     filterNews (state) {

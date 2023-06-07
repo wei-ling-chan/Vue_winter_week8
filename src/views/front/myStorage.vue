@@ -12,16 +12,16 @@
             <div class="card-body p-3">
             <div class="mb-4 tasty-item">
               <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5 class="card-title fw-bolder tasty-item-title d-block">{{product.title}}</h5>
+                <h5 class="card-title fw-bolder tasty-item-title d-block">{{ product.title }}</h5>
                 <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
               </div>
               <div class="d-flex justify-content-between">
-                <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{product.origin_price}}</span></div>
-                <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{product.price}}</div>
+                <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{ product.origin_price }}</span></div>
+                <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{ product.price }}</div>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-1  tasty-button">
-              <router-link :to="`/product/${product.id}`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
+              <router-link :to="`/product/${ product.id }`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
               <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
             </div>
             </div>
@@ -54,12 +54,10 @@ export default {
         .then((res) => {
           this.products = res.data.products
           this.filteredItems()
-          console.log(this.products, this.temProducts, this.favorites)
         })
     },
     filteredItems () {
       this.temProducts = this.products.filter(item => this.favorites.includes(item.id))
-      console.log(this.temProducts)
     },
     toggleFavorite (productId) {
       if (this.favorites.includes(productId)) {

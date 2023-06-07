@@ -1,39 +1,39 @@
 <template>
 <!-- header -->
 <div class="web">
-  <header class="header fixed-top w-100" :class="{'bg-black':isScrolled,'bg-transcolor':!isScrolled}">
-      <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container-fluid justify-content-between">
-            <router-link to="/"><img src="../assets/images/logo.png" class="logo" alt="麵鋪子" style="filter: brightness(0) saturate(0) invert(1);"></router-link>
-            <a class="logo navbar-brand d-none d-md-block " href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-              <ul class="menu navbar-nav  fs-5 text-center mb-md-0 mb-3">
-                <li class="nav-item me-md-4 me-0 mt-md-2  my-2 mt-4">
-                  <router-link to="/about" class="nav-link text-white">關於我們</router-link>
-                </li>
-                <li class="nav-item me-md-4 me-0 my-2 ">
-                  <router-link to="/products" class="nav-link text-white">美味專區</router-link>
-                </li>
-                <li class="nav-item me-md-4 me-0 my-2">
-                  <router-link to="/news" class="nav-link text-white">最新消息</router-link>
-                </li>
-                <li class="nav-item me-md-4 me-0 my-2">
-                  <router-link to="/myStorage" class="nav-link text-white">我的收藏</router-link>
-                </li>
+  <header class="header fixed-top w-100" :class="{ 'bg-black':isScrolled,'bg-transcolor':!isScrolled }">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid justify-content-between">
+          <router-link to="/"><img src="../assets/images/logo.png" class="logo" alt="麵鋪子" style="filter: brightness(0) saturate(0) invert(1);"></router-link>
+          <a class="logo navbar-brand d-none d-md-block " href="#"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="menu navbar-nav  fs-5 text-center mb-md-0 mb-3">
+              <li class="nav-item me-md-4 me-0 mt-md-2  my-2 mt-4">
+                <router-link to="/about" class="nav-link text-white">關於我們</router-link>
+              </li>
+              <li class="nav-item me-md-4 me-0 my-2 ">
+                <router-link to="/products" class="nav-link text-white">美味專區</router-link>
+              </li>
+              <li class="nav-item me-md-4 me-0 my-2">
+                <router-link to="/news" class="nav-link text-white">最新消息</router-link>
+              </li>
+              <li class="nav-item me-md-4 me-0 my-2">
+                <router-link to="/myStorage" class="nav-link text-white">我的收藏</router-link>
+              </li>
 
-                <li class="nav-item me-md-0 me-0 my-2">
-                  <router-link to="/cart" class="nav-link pe-0"><i class="bi bi-cart-fill"></i><span class="badge rounded-circle cart-badge rounded-pil fs-18">{{cartsLength}}</span></router-link>
-                </li>
-              </ul>
-            </div>
+              <li class="nav-item me-md-0 me-0 my-2">
+                <router-link to="/cart" class="nav-link pe-0"><i class="bi bi-cart-fill"></i><span class="badge rounded-circle cart-badge rounded-pil fs-18">{{cartsLength}}</span></router-link>
+              </li>
+            </ul>
           </div>
-        </nav>
-      </div>
-    </header>
+        </div>
+      </nav>
+    </div>
+  </header>
   <!--router-view -->
   <router-view></router-view>
   <!-- footer -->
@@ -44,8 +44,8 @@
         <ul class="contact-info">
           <li class="mb-1"><a href="tel:+0800-123-4567" class="text-decoration-none">電話: 04-1234567</a></li>
           <li class="mb-1"><a href="mailto:wlc606@gmail.com" class="text-decoration-none">E-mail: wlc606@gmail.com</a></li>
-          <li class="mb-1"><a href="javascript:void(0)" class="text-decoration-none">營業時間(週二公休): 11:00 am-7:00 pm</a></li>
-          <li class="mb-1"><a href="#" class="text-decoration-none">地址: 台中市XX區XX里一段XX巷</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none" @click.prevent>營業時間(週二公休): 11:00 am-7:00 pm</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none" @click.prevent>地址: 台中市XX區XX里一段XX巷</a></li>
         </ul>
       </nav>
       <nav class="menu-social d-md-block d-none">
@@ -98,11 +98,8 @@ export default {
       if (this.$refs.serch.value === '') {
         return
       }
-      if (event.keyCode === 13) {
-        // 轉址
-        this.$router.replace({ path: '/search', query: { name: this.$refs.serch.value } })
-        this.$refs.serch.value = ''
-      }
+      this.$router.replace({ path: '/search', query: { name: this.$refs.serch.value } })
+      this.$refs.serch.value = ''
     },
     setMenuFixed () {
       if (window.scrollY > 100) {

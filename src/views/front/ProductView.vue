@@ -45,17 +45,17 @@
             </div>
             <div class="product-info col-12 col-md-6 px-4">
               <div class="row">
-                <div class="col-12 mb-md-3 my-4"><h1 class="">{{ product.title}}<span class="badge bg-info ms-2 product_type">{{product.category}}</span></h1></div>
+                <div class="col-12 mb-md-3 my-4"><h1 class="">{{ product.title }}<span class="badge bg-info ms-2 product_type">{{ product.category }}</span></h1></div>
                 <div class="col-3">產品描述:</div>
-                <div class="col-9 pb-3 ps-0 description">{{ product.description}}</div>
+                <div class="col-9 pb-3 ps-0 description">{{ product.description }}</div>
                 <div class="col-3">商品內容:</div>
-                <div class="col-9 pb-3 ps-0 content">{{ product.content}}</div>
+                <div class="col-9 pb-3 ps-0 content">{{ product.content }}</div>
                 <div class="col-3 pb-3">價格:</div>
                 <div class="col-9 pb-3 ps-0"><span class="price">{{ product.price }}</span>元</div>
               </div>
               <div class="row justify-content-between">
                 <select class="col-5 py-1"  v-model="product.qty">
-                  <option :value="i" v-for="i in 20" :key="i+'45621'">{{i}}</option>
+                  <option :value="i" v-for="i in 20" :key="i+'45621'">{{ i }}</option>
                 </select>
                 <button type="button" class="col-5 btn btn-dark text-light" @click="addToCart(product.id,product.qty)">加到購物車</button>
               </div>
@@ -104,11 +104,11 @@
                 </div>
                 <div class="card-body h-100 d-flex flex-column justify-content-between">
                   <div>
-                    <h4 class="card-title">{{item.title}}</h4>
-                    <p class="card-text swiper-overflow">{{item.content}}</p>
+                    <h4 class="card-title">{{ item.title }}</h4>
+                    <p class="card-text swiper-overflow">{{ item.content }}</p>
                   </div>
                   <div>
-                    <p class="card-text">NT <span class="text-dangers">${{item.price}}</span></p>
+                    <p class="card-text">NT <span class="text-dangers">${{ item.price }}</span></p>
                     <a href="#" class="btn btn-info text-light" @click.prevent="addToCart(item.id,qty)">加入購物車</a>
                   </div>
                 </div>
@@ -166,11 +166,9 @@ export default {
   },
   methods: {
     getProduct () {
-      console.log(this.$route.params)
       const { id } = this.$route.params
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/product/${id}`)
         .then(res => {
-          // console.log(res.data.product)
           this.product = res.data.product
           this.getRelatedProducts()
           this.isLoading = false
@@ -185,7 +183,6 @@ export default {
     },
     getRelatedProducts () {
       this.products.forEach((item) => {
-        // console.log(item.category, this.product.category)
         if (item.category === this.product.category && item.id !== this.product.id) {
           this.relatedProducts.push(item)
         }
