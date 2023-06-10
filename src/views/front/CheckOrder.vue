@@ -1,5 +1,5 @@
 <template>
-  <loading v-model:active="isLoading"
+  <Loading v-model:active="isLoading"
           :can-cancel="true"
           :color="color"
           :on-cancel="onCancel"
@@ -320,7 +320,7 @@ export default {
         Swal.fire({
           // sweealert2
           title: '<strong>訂購成功</strong>',
-          iconHtml: '<img src="/vue_winter_week8/src/assets/images/shopping-finish.png" alt="">',
+          iconHtml: '<img src="/vue_winter_week8/src/assets/images/shopping-finish.png">',
           html: '感謝您的訂購</b>' + '<p>商品將會盡速送達</p> ',
           showCloseButton: true,
           focusConfirm: false,

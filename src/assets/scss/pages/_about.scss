@@ -6,8 +6,6 @@
   section{
     padding-top: 2vw;
   }
-
-
   .about-focus{    
     .about-focus-img1{
       width: 48px;
@@ -83,32 +81,7 @@
   
   /*RWD*/
   
-  @include media-breakpoint-down(md) {
-    // .banner{
-    //   .banner-title{
-    //    text-align: center;
-    //    top: 30%;
-    //      h2{
-    //        font-size: 28px;
-    //        margin-bottom: 16px;
-    //      }
-    //      .banner-subtitle{
-    //        font-size: 16px;
-    //      }
-    //    }
-    //    .banner-delicious-title{
-    //     border-bottom: 2px solid white;
-    //    }
-    //    .banner-info{
-         
-    //      text-align: center;
-    //      font-size: 18px;
-    //      bottom: 7%;          
-    //    }
-    //    .banner-info-mobile{
-    //      line-height: 2;
-    //    }
-    //  } 
+  @include media-breakpoint-down(md) {   
     .about{
       
       .about-focus{
@@ -120,7 +93,7 @@
         }
         h3{
           writing-mode: horizontal-tb;
-         margin-left: 0;
+           margin-left: 0;
           font-size: 24px;
           font-weight: bold;
            
@@ -146,18 +119,8 @@
     }
    }
   
-   @include media-breakpoint-down(lg){
-    // .banner{
-    //   .banner-title{
-    //     top:26%;
-    //   }
-    //   .banner-info{
-    //     top: 58%;
-    //   }
-  
-    // }
-    .about{
-      
+   @include media-breakpoint-down(lg){   
+    .about{      
       .about-delicious{
         .about-delicious-creative{
           padding-left: 8px;
@@ -165,25 +128,5 @@
         }
       }
     }
-   }
-  
-   @include media-breakpoint-down(xl){
-    // .banner{
-    //   .banner-title{
-    //     top:13%;
-    //   }
-    //   .banner-info{
-    //     top: 61%;
-    //   }
-  
-    // }  
-   }
-  
-  
-   
-  @include media-breakpoint-only(sm){
-    // .banner{
-    //   height: 55vh;
-    // }
-  }
+   }   
 }

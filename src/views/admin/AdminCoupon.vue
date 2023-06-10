@@ -41,16 +41,16 @@
         </tr>
         </tbody>
       </table>
-      <coupon-modal ref="couponModal" :is-new="isNew" :coupon="tempCoupon" :get-coupons="getCoupons"></coupon-modal>
-      <delCouponModal ref="delcouponModal" :coupon="tempCoupon" :get-coupons="getCoupons"></delCouponModal>
+      <CouponModal ref="couponModal" :is-new="isNew" :coupon="tempCoupon" :get-coupons="getCoupons"></CouponModal>
+      <DelCouponmodal ref="delcouponModal" :coupon="tempCoupon" :get-coupons="getCoupons"></DelCouponmodal>
     </div>
   </div>
 
 </template>
 
 <script>
-import couponModal from '../../components/CouponModal.vue'
-import delCouponModal from '../../components/delCouponModal.vue'
+import CouponModal from '@/components/CouponModal.vue'
+import DelCouponmodal from '@/components/DelCouponmodal.vue'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
@@ -66,7 +66,7 @@ export default {
     }
   },
   components: {
-    couponModal, delCouponModal
+    CouponModal, DelCouponmodal
   },
   methods: {
     openCouponModal (isNew, item) {

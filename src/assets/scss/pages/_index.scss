@@ -1,16 +1,6 @@
-
-.web{ 
-  // background-color:$primary;
+.web{   
   background-image: url(./images/bg.png) !important;
   background-repeat: repeat !important;
-}
-.card{
-  box-shadow: -3px 10px 15px -3px rgba(0,0,0,0.1);
-  border-radius: 1rem;
-}
-.slide-img{
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
 }
 
 .index{
@@ -160,8 +150,7 @@
     }
   }
   .new-product{
-    &.bg{
-      // height: 80vh;   
+    &.bg{     
       background-image: url(./images/newProductBg.jpg);  
     }
   }
@@ -205,61 +194,13 @@
       bottom:0;
       left:0px;      
     }     
-  }
-
-  // .banner-coupon{
-  //   background-image: url(./images/bg-coupon.png);
-  // }
-  // .news{
-  //   height: 35vh;
-  //   margin-bottom: 0;
-  //   .swiper-news{
-      
-  //     .swiper-news-son {    
-  //       height: 439px;
-  //       width: 100%;       
-  //     }      
-  //   }
-  //   .swiper-slide{
-  //     &-prev,&-next{
-  //       margin-top: 15%;
-  //       @media (min-width:992px) {
-  //         width: calc(25% - 24px) !important;
-  //         height: 50% !important;
-  //       }
-  //     }
-  //     opacity: 0.5;
-  //     filter: grayscale(100%);     
-        
-  //     img{               
-  //       width: 100%;
-  //       height: 100%;
-  //       object-fit: cover;
-  //       object-position: center;
-  //     }
-     
-  //   }
-  //   .swiper-slide-active{
-  //    @media (min-width:992px) {
-  //     width: calc(50%) !important;
-  //     transform: scale(0.9);
-      
-  //    }        
-  //     opacity: 1;
-  //     filter: grayscale(0%);       
-  //     .artist-btn,.artist-info{
-  //       display: block;
-  //     }
-  //   }   
-  // }
+  }  
 
   .hot-food{
     img{
       width: 50%;
     }
-  }
-
- 
+  } 
 
   .hot-product{
     margin-top: 5rem;
@@ -309,8 +250,7 @@
     .swiper-button-prev,.swiper-button-next{
       position: absolute;
       top: 50%;           
-    }
-    
+    }    
   
     .swiper-button-prev img,
     .swiper-button-next img {
@@ -349,13 +289,10 @@
   }
   
  }
-
-
+ 
 @include media-breakpoint-down(xl) {
   .index{
-    .news{
-      // margin-top: 200px;
-      // margin-bottom: 200px;
+    .news{     
       .news-items,.news-border{
         height: 30vh;
       }
@@ -461,11 +398,5 @@
       width: 77% !important;
       margin-bottom: 2px !important;
     }
-  }
-  
+  }  
  }
-
-
-
-
-

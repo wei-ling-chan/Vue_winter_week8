@@ -128,8 +128,8 @@
       <!-- 購物車沒品項開始 -->
       <div v-else class="text-center">
         <div class="d-flex flex-column justify-content-center">
-          <img src="../../assets/images/eat-noodle.png" class="d-none d-md-block mx-auto" alt="" style="width: 500px;height:500px;">
-          <img src="../../assets/images/eat-noodle.png" class="d-block d-md-none mx-auto" alt="" style="width: 400px;height:400px;">
+          <img src="@/assets/images/eat-noodle.png" class="d-none d-md-block mx-auto" alt="趕快去購買喔!" style="width: 500px;height:500px;">
+          <img src="@/assets/images/eat-noodle.png" class="d-block d-md-none mx-auto" alt="趕快去購買喔!" style="width: 400px;height:400px;">
           <h1 class="h5 text-center mb-4">購物車還沒有任何商品喔!</h1>
         </div>
         <button type="button" class="btn btn-dark rounded-0 margin-auto"><router-link to="/products" class="nav-link">繼續購物</router-link></button>

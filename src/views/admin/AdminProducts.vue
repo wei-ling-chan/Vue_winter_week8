@@ -50,16 +50,16 @@
         </tr>
       </tbody>
     </table>
-    <pagination-components :pages="page" :get-product="getProduct" @change-page="getProduct"></pagination-components>
-    <product-modal ref="productModal" @update-product="updateProduct" :product="template"></product-modal>
-    <delproduct-modal ref="delproductModal" @del-product="delProduct" :product="template"></delproduct-modal>
+    <PaginationComponents :pages="page" :get-product="getProduct" @change-page="getProduct"></PaginationComponents>
+    <ProductModal ref="productModal" @update-product="updateProduct" :product="template"></ProductModal>
+    <DelProductmodal ref="delproductModal" @del-product="delProduct" :product="template"></DelProductmodal>
   </div>
 </template>
 
 <script>
-import PaginationComponents from '../../components/PaginationComponents.vue'
-import ProductModal from '../../components/ProductModal.vue'
-import delproductModal from '../../components/delproductModal.vue'
+import PaginationComponents from '@/components/PaginationComponents.vue'
+import ProductModal from '@/components/ProductModal.vue'
+import DelProductmodal from '@/components/DelProductmodal.vue'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
@@ -73,7 +73,7 @@ export default {
     }
   },
   components: {
-    PaginationComponents, ProductModal, delproductModal
+    PaginationComponents, ProductModal, DelProductmodal
 
   },
   methods: {

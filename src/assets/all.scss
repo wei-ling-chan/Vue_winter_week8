@@ -1,19 +1,18 @@
 @import "bootstrap/scss/functions";
-@import "./variables";
+@import "./scss/helpers/variables";
 @import "bootstrap/scss/bootstrap";
-@import "./style/pages/base";
-// @import "./style/pages/spacers";
-@import "./style/pages/loading";
-@import "./style/layout/header";
-@import "./style/layout/footer";
-@import "./style/pages/login";
-@import "./style/pages/about";
-@import "./style/pages/index";
-@import "./style/pages/news";
-@import "./style/pages/tasty";
-@import "./style/pages/tastyDetail";
-@import "./style/pages/cart";
-@import "./style/pages/checkOrder";
-@import "./style/pages/cartFont"
+@import "./scss/helpers/base";
+@import "./scss/pages/loading";
+@import "./scss/layout/header";
+@import "./scss/layout/footer";
+@import "./scss/pages/login";
+@import "./scss/pages/about";
+@import "./scss/pages/index";
+@import "./scss/pages/news";
+@import "./scss/pages/tasty";
+@import "./scss/pages/tastyDetail";
+@import "./scss/pages/cart";
+@import "./scss/pages/checkOrder";
+@import "./scss/pages/cartFont"
 
 

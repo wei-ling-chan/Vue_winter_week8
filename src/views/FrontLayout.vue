@@ -5,7 +5,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid justify-content-between">
-          <router-link to="/"><img src="../assets/images/logo.png" class="logo" alt="麵鋪子" style="filter: brightness(0) saturate(0) invert(1);"></router-link>
+          <router-link to="/"><img src="@/assets/images/logo.png" class="logo" alt="麵鋪子" style="filter: brightness(0) saturate(0) invert(1);"></router-link>
           <a class="logo navbar-brand d-none d-md-block " href="#"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

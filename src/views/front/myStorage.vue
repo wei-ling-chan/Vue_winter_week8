@@ -7,7 +7,7 @@
         <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in temProducts" :key="product.id">
           <div class="card mx-2 my-5">
             <div class="slide-hover">
-              <img :src="product.imageUrl" alt="" class="slide-img">
+              <img :src="product.imageUrl" alt="收藏" class="slide-img">
             </div>
             <div class="card-body p-3">
             <div class="mb-4 tasty-item">

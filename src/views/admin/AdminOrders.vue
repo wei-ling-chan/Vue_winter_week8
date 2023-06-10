@@ -62,13 +62,13 @@
       </template>
     </tbody>
   </table>
-  <order-modal ref="orderModal" :order="tempOrder" @change-status="updatePaid"></order-modal>
-  <del-order-modal ref="delOrderModal" :order="tempOrder" @del-item="delAdminOrder"></del-order-modal>
+  <AdminOrdermodal ref="orderModal" :order="tempOrder" @change-status="updatePaid"></AdminOrdermodal>
+  <DelOrdermodal ref="delOrderModal" :order="tempOrder" @del-item="delAdminOrder"></DelOrdermodal>
 </template>
 
 <script>
-import orderModal from '../../components/adminOrderModal.vue'
-import delOrderModal from '../../components/delOrderModal.vue'
+import AdminOrdermodal from '@/components/AdminOrdermodal.vue'
+import DelOrdermodal from '@/components/DelOrdermodal.vue'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
@@ -83,7 +83,7 @@ export default {
     }
   },
   components: {
-    orderModal, delOrderModal
+    AdminOrdermodal, DelOrdermodal
   },
   methods: {
     // 取得後台訂單

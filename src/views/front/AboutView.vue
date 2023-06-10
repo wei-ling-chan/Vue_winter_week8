@@ -31,11 +31,11 @@
       </p>
     </section>
     <section class="about-focus mb-md-100">
-      <h2 class="text-center mb-md-6 mb-4 title-line mx-auto">我們的理念<img src="/src/assets/images/news-leaf.png" alt="" class="about-focus-img1 me-md-4"></h2>
+      <h2 class="text-center mb-md-6 mb-4 title-line mx-auto">我們的理念<img src="@/assets/images/news-leaf.png" alt="葉子" class="about-focus-img1 me-md-4"></h2>
       <div class="row mb-6 mb-md-80">
         <div class="col-md-7">
           <div class="px-md-4  focus-img">
-            <img src="/src/assets/images/about-focus1.jpg" alt="">
+            <img src="@/assets/images/about-focus1.jpg" alt="專注">
           </div>
         </div>
         <div class="col-md-5 py-1 mb-4 align-self-center">
@@ -69,7 +69,7 @@
          <!---->
         <div class="col-md-7">
          <div class="px-md-4  focus-img">
-           <img src="/src/assets/images/service.jpg" alt="">
+           <img src="@/assets/images/service.jpg" alt="服務">
          </div>
         </div>
         <!--mobile-->
@@ -88,11 +88,11 @@
        </div>
     </section>
     <section class="about-delicious mb-md-100 mb-5">
-      <h2 class="text-center mb-md-6 mb-4 mx-auto title-line">新口味<img src="/src/assets/images/news-tasty4.png" alt="" class="about-delicious-img1 ms-md-2 me-md-4"></h2>
+      <h2 class="text-center mb-md-6 mb-4 mx-auto title-line">新口味<img src="@/assets/images/news-tasty4.png" alt="新口味" class="about-delicious-img1 ms-md-2 me-md-4"></h2>
 
       <div class="row align-items-md-center mb-md-4 justify-content-center">
-        <div class="col-md-4 col-lg-5 col-xl-4"><div class="px-md-2"><img src="/src/assets/images/about-delicious-img.jpg" alt="" class="about-delicious-img"></div></div>
-        <div class="col-md-4 d-flex justify-content- align-items-end mt-2"><div class="px-md-2 pt-2 pb-3"><h1 class="m-md-0 mb-md-3 h4">麵鋪子</h1><img src="/src/assets/images/seal.jpg" alt="" class="about-delicious-seal"></div><p class="px-md-80 px-lg-3 py-md-3  about-delicious-creative">持續創新，<br>我們會不定期推出新口味 !</p></div>
+        <div class="col-md-4 col-lg-5 col-xl-4"><div class="px-md-2"><img src="@/assets/images/about-delicious-img.jpg" alt="美味" class="about-delicious-img"></div></div>
+        <div class="col-md-4 d-flex justify-content- align-items-end mt-2"><div class="px-md-2 pt-2 pb-3"><h1 class="m-md-0 mb-md-3 h4">麵鋪子</h1><img src="@/assets/images/seal.jpg" alt="麵鋪子" class="about-delicious-seal"></div><p class="px-md-80 px-lg-3 py-md-3  about-delicious-creative">持續創新，<br>我們會不定期推出新口味 !</p></div>
       </div>
     </section>
     <section class="tasty-menu-fixed" data-aos="fade-right" :class="{ 'show': isMenuFixed }" @click="scrollMeTo">

@@ -1,5 +1,5 @@
 <template>
-  <loading v-model:active="isLoading"
+  <Loading v-model:active="isLoading"
           :can-cancel="true"
           :color="color"
           :on-cancel="onCancel"
@@ -41,7 +41,7 @@
         <div class="tastyDetail-product-item mx-auto">
           <div class="row">
             <div class="col-12 col-md-6 px-4">
-              <div><img :src="product.imageUrl" alt="" class="rounded"></div>
+              <div><img :src="product.imageUrl" alt="商品" class="rounded"></div>
             </div>
             <div class="product-info col-12 col-md-6 px-4">
               <div class="row">
@@ -100,7 +100,7 @@
               <div class="card h-100 justify-content-between">
                 <!-- <div class="slide-img mt-auto" :style="{ backgroundImage: `url(${item.imageUrl})` }"></div> -->
                 <div class="slide-hover">
-                  <img :src="item.imageUrl" alt="" class="slide-img">
+                  <img :src="item.imageUrl" alt="商品" class="slide-img">
                 </div>
                 <div class="card-body h-100 d-flex flex-column justify-content-between">
                   <div>
@@ -116,10 +116,10 @@
             </swiper-slide>
           </swiper>
           <div class="swiper-button-prev" ref="prevButton"  @click="onPrev">
-            <img src="/src/assets/images/images_swiper/arrow-left.png" />
+            <img src="@/assets/images/images_swiper/arrow-left.png" />
           </div>
           <div class="swiper-button-next"  ref="nextButton" @click="onNext">
-            <img src="/src/assets/images/images_swiper/arrow-right.png" />
+            <img src="@/assets/images/images_swiper/arrow-right.png" />
           </div>
         </div>
       </section>
