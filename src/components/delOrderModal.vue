@@ -39,7 +39,6 @@ export default {
   methods: {
     delorder () {
       this.tempOrder = this.order
-      console.log(this.tempOrder)
     },
     openModal () {
       this.modal.show()
@@ -51,7 +50,6 @@ export default {
   watch: {
     order () {
       this.tempOrder = this.order
-      console.log(this.order)
     }
   },
   mounted () {

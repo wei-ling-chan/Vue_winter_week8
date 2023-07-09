@@ -8,10 +8,10 @@
 
 <!-- 購物資訊與表單驗證 -->
   <!--購物資訊  -->
-  <div style="height: 20vh;"></div>
-  <div class="cart d-flex flex-column align-items-center mb-5 mb-md-7 mt-4 mt-md-7">
+  <div class="cart-space"></div>
+  <div class="cart-font d-flex flex-column align-items-center mb-5 mb-md-7 mt-4">
     <!-- <h1 class="mb-5">我的購物車</h1> -->
-      <div class="d-none d-md-block" style="width: 70%;">
+      <div class="d-none d-lg-block" style="width: 70%;">
          <!-- 購物流程開始 -->
         <div class="position-relative mx-auto m-4 mb-9" style="width: 50%;">
           <div class="progress" style="height: 1px;">
@@ -25,64 +25,55 @@
 
         <!-- 正式開始 -->
           <div class="d-flex justify-content-start align-items-start">
-            <table class="table align-middle fs-6 border border-dark" style="width: 50%;">
+            <table class="table align-middle border border-dark order-contents " style="width: 50%;">
               <thead>
-                <tr class="table-dark">
-                  <th>訂單內容</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                <tr class="table-dark text-center fs-md">
+                  <th colspan="4">訂單內容</th>
                 </tr>
-                <tr>
+                <tr class="text-center fs-md">
                   <th class="table-image">商品</th>
                   <th>品名</th>
                   <th>數量</th>
-                  <th class="text-center">小計</th>
-                  <th class="text-center fs-7" v-if="cart.total !== cart.final_total">折扣後金額</th>
-                  <th></th>
+                  <th class="text-center">金額</th>
                 </tr>
               </thead>
               <tbody>
                 <template v-if="cart.carts">
-                  <tr v-for="item in cart.carts" :key="item.id">
+                  <tr v-for="item in cart.carts" :key="item.id" class="fs-md">
                     <td>
                       <div
                           style="
                             height: 100px;
                             background-size: cover;
                             background-position: center;
-                            width: 100px
+                            width: 100%
                           "
                           :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
                         ></div>
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{ item.product.title }}
-                      <!-- <div class="text-success" v-if="item.coupon">已套用</div> -->
                     </td>
                     <td>
                       <div class="ms-2 text-center">
                         {{ item.qty }}
                       </div>
                     </td>
-                    <td class="text-center" :class="{ 'text-decoration-line-through': item.total !== item.final_total }">
+                    <td class="text-center" v-if="cart.total === cart.final_total">
                       {{ item.total }}
                     </td>
                     <td class="text-center" v-if="cart.total !== cart.final_total">
-                      {{ Math.round(item.total - item.final_total) }}
+                      {{ Math.round(item.final_total) }}
                     </td>
                   </tr>
                 </template>
               </tbody>
               <tfoot>
-                <tr>
+                <tr class="fs-md">
                   <td class="text-center text-info" v-if="cart.total !== cart.final_total">已折扣</td>
-                  <td class="text-center text-info" v-if="cart.total !== cart.final_total">{{ Math.round(cart.final_total) }}</td>
-                  <td v-if="cart.total !== cart.final_total"></td>
+                  <td class="text-center text-info" v-if="cart.total !== cart.final_total">{{ Math.round(cart.total-cart.final_total) }}</td>
                   <td class="text-center" v-if="cart.total !== cart.final_total">金額</td>
-                  <td class="text-center text-danger" v-if="cart.total !== cart.final_total">{{ Math.round(cart.total-cart.final_total) }}</td>
+                  <td class="text-center text-danger" v-if="cart.total !== cart.final_total">{{ Math.round(cart.final_total) }}</td>
                   <td v-if="cart.total === cart.final_total"></td>
                   <td v-if="cart.total === cart.final_total"></td>
                   <td class="text-center" v-if="cart.total === cart.final_total">總計</td>
@@ -90,9 +81,9 @@
                 </tr>
               </tfoot>
             </table>
-            <!-- 表單驗證開始123 -->
-            <div class=" d-flex flex-column align-items-center ms-4 mb-9 border border-1 border-dark" style="width: 49%;">
-              <div class="text-center fs-6 p-2 bg-dark text-white w-100">填寫資訊</div>
+            <!-- 表單驗證開始 -->
+            <div class=" d-flex flex-column align-items-center ms-4 mb-9 border border-1 border-dark information" style="width: 49%;">
+              <div class="text-center p-2 bg-dark text-white w-100 information-title fs-md">填寫資訊</div>
                 <v-form ref="form" class="p-4" style="width: 95%;" v-slot="{ errors }" >
                   <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -101,14 +92,12 @@
                               rules="email|required" v-model="data.user.email"></v-field>
                     <error-message name="email" class="invalid-feedback"></error-message>
                   </div>
-
                   <div class="mb-3">
                     <label for="name" class="form-label">收件人姓名</label>
                     <v-field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
                               placeholder="請輸入姓名" rules="required" v-model="data.user.name"></v-field>
                     <error-message name="姓名" class="invalid-feedback"></error-message>
                   </div>
-
                   <div class="mb-3">
                     <label for="tel" class="form-label">收件人電話</label>
                     <v-field id="tel" name="電話" type="text" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
@@ -157,13 +146,13 @@
                   </div>
                 </v-form>
             </div>
-            <!-- 表單驗證結束123 -->
+            <!-- 表單驗證結束 -->
           </div>
         <!-- 正式結束 -->
 
       </div>
       <!-- 手機板開始 -->
-      <div class="d-md-none d-flex flex-column px-0 table-responsive">
+      <div class="d-block d-lg-none d-flex flex-column px-0 table-responsive" style="width: 90%;">
         <!-- 購物流程開始 -->
         <div class="position-relative mx-auto m-5 mb-7" style="width: 50%;">
           <div class="progress" style="height: 1px;">
@@ -177,17 +166,13 @@
         <div class="d-flex justify-content-start align-items-start">
           <table class="table align-middle border border-1 border-dark">
             <thead>
-              <tr class="table-dark">
-                <th>訂單內容</th>
-                <th></th>
-                <th></th>
-                <th></th>
+              <tr class="table-dark text-center">
+                <th colspan="4">訂單內容</th>
               </tr>
               <tr>
-                <th class="text-start">圖片</th>
-                <th class="text-start">品名/數量</th>
+                <th class="text-center">商品</th>
+                <th class="text-center">品名/數量</th>
                 <th class="text-center">金額</th>
-                <th class="text-center"></th>
               </tr>
             </thead>
             <tbody>
@@ -197,18 +182,18 @@
                     <div
                         style="
                           height: 100px;
-                          background-size: cover;
+                          background-size: contain;
                           background-position: center;
-                          width: 100px
+                          background-repeat: no-repeat;
                         "
                         :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
                       ></div>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <div class="d-flex flex-column">
                       <div class="name-number">
                         {{ item.product.title }}
-                        <!-- <div class="text-success d-none" v-if="item.coupon">已套用</div> -->
+
                       </div>
                       <div class="text-center mt-1">
                         {{ item.qty }}
@@ -217,11 +202,11 @@
                   </td>
                   <td>
                     <div class="priced-flex flex-column">
-                      <div class="text-center" :class="{ 'text-decoration-line-through': item.total !== item.final_total }">
-                        小計:{{ item.total }}
+                      <div class="text-center" v-if="cart.total === cart.final_total">
+                        {{ item.total }}
                       </div>
                       <div class="text-center" v-if="cart.total !== cart.final_total">
-                        折扣後金額:{{ Math.round(item.total - item.final_total) }}
+                        {{ Math.round(item.final_total) }}
                       </div>
                     </div>
                   </td>
@@ -230,12 +215,9 @@
             </tbody>
             <tfoot>
               <tr>
-                  <td class="text-center text-info" v-if="cart.total !== cart.final_total">已折扣</td>
-                  <td class="text-center text-info" v-if="cart.total !== cart.final_total">{{ Math.round(cart.final_total) }}</td>
-                  <!-- <td v-if="cart.total !== cart.final_total"></td> -->
+                  <td class="text-center text-info" v-if="cart.total !== cart.final_total">已折扣:&nbsp;{{ Math.round(cart.total-cart.final_total) }}</td>
                   <td class="text-center" v-if="cart.total !== cart.final_total">金額</td>
-                  <td class="text-center text-danger" v-if="cart.total !== cart.final_total">{{ Math.round(cart.total-cart.final_total) }}</td>
-                  <td v-if="cart.total === cart.final_total"></td>
+                  <td class="text-center text-danger" v-if="cart.total !== cart.final_total">{{ Math.round(cart.final_total) }}</td>
                   <td v-if="cart.total === cart.final_total"></td>
                   <td class="text-center" v-if="cart.total === cart.final_total">總計</td>
                   <td class="text-center" v-if="cart.total === cart.final_total" :class="{ 'text-decoration-line-through': cart.total !== cart.final_total }">{{ cart.total }}</td>
@@ -244,8 +226,8 @@
           </table>
         </div>
         <!-- 表單驗證開始123 -->
-        <div class=" d-flex flex-column align-items-center mb-2 border border-1 border-dark">
-          <div class="text-center fs-6 p-2 bg-dark text-white w-100">填寫資訊</div>
+        <div class=" d-flex flex-column align-items-center mb-2 border border-1 border-dark information">
+          <div class="information-title text-center p-2 bg-dark text-white w-100 fs-md">填寫資訊</div>
             <v-form ref="form" class="p-4" style="width: 100%;" v-slot="{ errors }" >
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -254,14 +236,12 @@
                           rules="email|required" v-model="data.user.email"></v-field>
                 <error-message name="email" class="invalid-feedback"></error-message>
               </div>
-
               <div class="mb-3">
                 <label for="name" class="form-label">收件人姓名</label>
                 <v-field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
                           placeholder="請輸入姓名" rules="required" v-model="data.user.name"></v-field>
                 <error-message name="姓名" class="invalid-feedback"></error-message>
               </div>
-
               <div class="mb-3">
                 <label for="tel" class="form-label">收件人電話</label>
                 <v-field id="tel" name="電話" type="text" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
@@ -310,7 +290,7 @@
               </div>
             </v-form>
         </div>
-            <!-- 表單驗證結束123 -->
+            <!-- 表單驗證結束-->
         <!-- 手機板結束 -->
       </div>
   </div>
@@ -319,8 +299,9 @@
 <script>
 // loading
 import Loading from 'vue-loading-overlay'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 import 'vue-loading-overlay/dist/css/index.css'
-// import { ref } from 'vue'
 // 表單驗證
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
 import AllRules from '@vee-validate/rules'
@@ -394,8 +375,8 @@ export default {
           this.cart = res.data.data
           this.isLoading = false
         })
-        .catch((err) => {
-          console.log(err.response.data.message)
+        .catch((error) => {
+          this.showErrorAlert(error)
         })
     },
     // 結帳
@@ -410,8 +391,8 @@ export default {
           this.$refs.form.resetForm()
           this.orderinfo()
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch((error) => {
+          this.showErrorAlert(error)
         })
       this.cart = ''
       this.$refs.form.resetForm()
@@ -441,7 +422,8 @@ export default {
       this.payMethos.orderCount = this.payMethos.orderCount + 1
       const payMethosStr = JSON.stringify(this.payMethos)
       localStorage.setItem('order', payMethosStr)
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   },
   mounted () {
     this.doAjax()

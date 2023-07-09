@@ -28,6 +28,8 @@
 
 <script>
 import Modal from 'bootstrap/js/dist/modal'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   props: ['coupon', 'getCoupons'],
@@ -56,10 +58,11 @@ export default {
         .then(res => {
           this.hideModal()
           this.getCoupons()
-        }).catch(err => {
-          console.log(err)
+        }).catch(error => {
+          this.showErrorAlert(error)
         })
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   },
   mounted () {
     // 取出token

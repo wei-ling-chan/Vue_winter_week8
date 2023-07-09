@@ -2,10 +2,7 @@
   .banner-about{
     background-image: url(./images/about-banner.png);
 
-  }
-  section{
-    padding-top: 2vw;
-  }
+  } 
   .about-focus{    
     .about-focus-img1{
       width: 48px;
@@ -24,7 +21,8 @@
     }
     .rectangle{      
       background-color:#427D53 ;
-      width: 50px;
+      width: 3vw;
+      min-width: 30px;
       height: 100px;
     }
     h3{
@@ -39,7 +37,19 @@
         max-height: 100%;
         border-radius: 20px;
         object-fit: cover;
-        object-position: center;  
+        object-position: center; 
+        width: 705px;
+        height: 397px; 
+      }
+    }
+    @media (max-width:767.98px) {
+      h3{
+        margin-block-start: 0.5em;
+        margin-block-end: 0.5em;
+      }
+      .rectangle{      
+        width: 30px;
+        height: 80px;
       }
     }
   }
@@ -72,10 +82,10 @@
       background-size: 0.1rem 0.1rem;
     }
     .about-delicious-seal{
-      width: 48px;
+      width: 85px;
     }
     p{
-      font-size: 24px;
+      font-size: 20px;
     }
   }   
   

@@ -5,7 +5,7 @@
           :on-cancel="onCancel"
           :loader="loader"
           :is-full-page="fullPage"/>
-  <div style="height: 25vh;"></div>
+  <div class="cart-space"></div>
   <div class="cart d-flex flex-column align-items-center mb-5 mb-md-8 mt-4">
       <table class="d-none d-md-block"  style="width: 70%;" v-if="cart.carts && Object.keys(cart.carts).length > 0">
         <!-- 購物流程開始 -->
@@ -30,45 +30,45 @@
         <table class="table align-middle fs-5">
           <thead>
             <tr></tr>
-            <tr>
-              <th>商品</th>
-              <th>品名</th>
-              <th style="width: 150px">數量</th>
-              <th class="text-center">小計</th>
-              <th class="text-center" v-if="cart.total !== cart.final_total">折扣後金額</th>
-              <th class="text-center"></th>
+            <tr class="text-center fs-md">
+              <th class="cart-product">商品</th>
+              <th class="cart-product">品名</th>
+              <th class="cart-product">數量</th>
+              <th class="cart-product">金額</th>
+              <th style="width: 20%;"></th>
             </tr>
           </thead>
           <tbody>
             <template v-if="cart.carts">
-              <tr v-for="item in cart.carts" :key="item.id">
+              <tr v-for="item in cart.carts" :key="item.id" class="fs-md">
                 <td>
                   <div
                       style="
-                        height: 150px;
-                        background-size: cover;
+                        width: 90%;
+                        height:150px;
+                        background-size:cover;
+                        background-repeat: no-repeat;
                         background-position: center;
-                        width: 250px
                       "
-                      :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
+                      :style="{ backgroundImage: `url(${item.product.imageUrl})` }" class="cart-product cart-product-img"
                     ></div>
                 </td>
                 <td>
-                  {{ item.product.title }}
-                  <div class="text-success fs-7" v-if="item.coupon">已套用</div>
+                  <div class="text-center"> {{ item.product.title }}</div>
+                  <div class="text-center text-info use-coupon" v-if="item.coupon">已套用優惠卷</div>
                 </td>
                 <td>
-                  <div class="input-group" style="width: 180px;">
+                  <div class="input-group mx-auto cart-amount">
                     <button class="btn btn-outline-secondary rounded-0 px-2" type="button" @click.prevent="updateCart(item,item.qty-1)"><i class="bi bi-dash-lg"></i></button>
                     <input type="text" class="form-control text-center"  :value="item.qty"  @change="updateCart(itemitem.qty)" placeholder="" aria-label="Example text with two button addons" readonly>
                     <button class="btn btn-outline-secondary rounded-0 px-2" type="button" @click.prevent="updateCart(item,item.qty+1)"><i class="bi bi-plus"></i></button>
                   </div>
                 </td>
-                <td class="text-center" :class="{ 'text-decoration-line-through': item.total !== item.final_total }">
-                  {{ item.total }}
-                </td>
-                <td class="text-center" v-if="cart.total !== cart.final_total">
-                  {{ Math.round(item.total - item.final_total) }}
+                <td class="text-center position-relative">
+                  <div v-if="item.total !== item.final_total">NT$&nbsp;{{ Math.round(item.final_total) }}</div>
+                  <div class="text-center" v-if="item.total === item.final_total">
+                    NT$&nbsp;{{ item.total }}
+                  </div>
                 </td>
                 <td class="text-center">
                   <button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="deleteCartItem(item)" :disabled="lodingItem === item.id">
@@ -80,38 +80,35 @@
             </template>
           </tbody>
           <tfoot>
-            <tr style="border:0;">
+            <tr style="border:0;" class="fs-md">
               <td class="text-end" style="border:0;"></td>
               <td class="text-end" style="border:0;"></td>
-              <td style="border:0;"></td>
               <td style="border:0;"></td>
               <td class="text-center" style="border:0;">總計</td>
-              <td class="text-center" :class="{ 'text-decoration-line-through': cart.total !== cart.final_total }" style="border:0;">{{ cart.total }}</td>
+              <td class="text-center" :class="{ 'text-decoration-line-through': cart.total !== cart.final_total }" style="border:0;">NT$&nbsp;{{ cart.total }}</td>
             </tr>
-            <tr v-if="cart.total !== cart.final_total">
+            <tr v-if="cart.total !== cart.final_total" class="fs-md">
               <td class="text-end"></td>
               <td class="text-end"></td>
-              <td></td>
               <td></td>
               <td class="text-center">折扣後金額</td>
-              <td class="text-center text-danger">{{ Math.round(cart.total-cart.final_total) }}</td>
+              <td class="text-center text-danger">NT$&nbsp;{{ Math.round(cart.final_total) }}</td>
             </tr>
-
           </tfoot>
         </table>
         <!-- 優惠碼開始 -->
         <div class="input-group input-group-sm coupon mt-5">
-          <div class="col-xl-3 col-md-12 me-2">
+          <div class="col-xl-3 col-md-3 me-2">
             <input ref="coupon_input"
               type="text"
-              class="form-control me-3 rounded-0 fs-6"
-              v-model="coupon_code"
+              class="form-control me-3 rounded-0 fs-md"
+              v-model="coupon_code" :disabled="couponApplied"
               placeholder="請輸入優惠碼"/>
           </div>
-          <div class="col-xl-3 col-md-12">
+          <div class="col-xl-3 col-md-3">
             <div class="input-group-append">
               <button
-                class="btn btn-outline-secondary me-3 rounded-0 fs-6 fs-md-6"
+                class="btn btn-outline-secondary rounded-0 fs-md"
                 type="button" :disabled="couponApplied"
                 @click="addCouponCode"
                 >
@@ -120,10 +117,13 @@
             </div>
           </div>
           <div class="d-flex ms-auto">
-            <button type="button" class="btn btn-dark rounded-0 fs-5"><router-link to="/products" class="nav-link">繼續購物</router-link></button>
-            <button type="button" class="btn btn-info ms-4 rounded-0 text-white fs-5" @click.prevent="nextCart">下一步</button>
+            <button type="button" class="btn btn-dark rounded-0 fs-md"><router-link to="/products" class="nav-link">繼續購物</router-link></button>
+            <button type="button" class="btn btn-info ms-4 rounded-0 text-white fs-md" @click.prevent="nextCart">下一步</button>
           </div>
         </div>
+        <template v-if="reEnter">
+          <div class="fs-6 text-dark mt-1"><i class="fa-solid fa-triangle-exclamation me-1"></i>{{showEnter}}</div>
+        </template>
       </table>
       <!-- 購物車沒品項開始 -->
       <div v-else class="text-center">
@@ -150,8 +150,8 @@
         <table class="table align-middle">
           <thead>
             <tr>
-              <th class="text-start">圖片</th>
-              <th class="text-start">品名/數量</th>
+              <th class="text-center">商品</th>
+              <th class="text-center">品名/數量</th>
               <th class="text-center">金額</th>
               <th class="text-center"></th>
             </tr>
@@ -170,7 +170,7 @@
                       :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
                     ></div>
                 </td>
-                <td>
+                <td class="text-center">
                   <div class="d-flex flex-column">
                     <div class="name-number">
                       {{ item.product.title }}
@@ -180,17 +180,19 @@
                     <select name="" id="" class="form-select" v-model="item.qty" @change="updateCart(item)" :disabled="lodingItem === item.id">
                       <option :value="i" v-for="i in 20" :key="i+'45621'">{{ i }}</option>
                     </select>
+                    <!-- <button class="btn btn-outline-secondary rounded-0 px-2" type="button" @click.prevent="updateCart(item,item.qty-1)"><i class="bi bi-dash-lg"></i></button>
+                    <input type="text" class="form-control text-center"  :value="item.qty"  @change="updateCart(itemitem.qty)" placeholder="" aria-label="Example text with two button addons" readonly>
+                    <button class="btn btn-outline-secondary rounded-0 px-2" type="button" @click.prevent="updateCart(item,item.qty+1)"><i class="bi bi-plus"></i></button> -->
                   </div>
                   </div>
                 </td>
                 <td>
                   <div class="priced-flex flex-column">
-                    <div class="text-center" :class="{ 'text-decoration-line-through': item.total !== item.final_total }">
-                      小計:{{ item.total }}
+                    <div class="text-center" v-if="item.total === item.final_total">
+                      {{ item.total}}
                     </div>
-                    <div class="text-center" v-if="cart.total !== cart.final_total">
-
-                      折扣後金額:{{ Math.round(item.total - item.final_total) }}
+                    <div class="text-center" v-if="item.total !== item.final_total">
+                      {{ Math.round(item.final_total) }}
                     </div>
                   </div>
                 </td>
@@ -215,25 +217,25 @@
               <td class="text-end"></td>
               <td class="text-end"></td>
               <td class="text-center">折扣後金額</td>
-              <td class="text-center text-danger">{{ Math.round(cart.total-cart.final_total) }}</td>
+              <td class="text-center text-danger">{{ Math.round(cart.final_total) }}</td>
             </tr>
 
           </tfoot>
         </table>
         <!-- 手機板優惠碼開始 -->
         <div class="d-flex flex-column align-items-betw input-group input-group-sm coupon">
-          <div class="d-flex justify-content-end mb-3">
-            <div class="col-7 col-xl-3 col-md-12 me-2">
+          <div class="d-flex justify-content-between mt-1 mb-3">
+            <div class="col-8 col-xl-3 col-md-12 me-2">
               <input ref="coupon_input"
                 type="text"
-                class="form-control me-3 rounded-0 fs-md-8 fs-14"
-                v-model="coupon_code"
+                class="form-control me-3 rounded-0 fs-md-8 molbile-size"
+                v-model="coupon_code" :disabled="couponApplied"
                 placeholder="請輸入優惠碼"/>
             </div>
-            <div class="col-4 col-xl-3 col-md-12">
+            <div class="col-xl-3 col-md-12">
               <div class="input-group-append">
                 <button
-                  class="btn btn-outline-secondary fs-md-6 fs-14 me-3 rounded-0"
+                  class="btn btn-outline-secondary fs-md-6 rounded-0 molbile-size"
                   type="button" :disabled="couponApplied"
                   @click="addCouponCode"
                   >
@@ -242,7 +244,10 @@
               </div>
             </div>
           </div>
-          <div class="px-2 d-flex flex-column align-items-center">
+          <template v-if="reEnter">
+            <div class="fs-12 text-dark reEnter"><i class="fa-solid fa-triangle-exclamation me-1 mb-3"></i>{{showEnter}}</div>
+          </template>
+          <div class="d-flex flex-column align-items-center">
             <button type="button" class="btn btn-dark rounded-0 fs-8 w-50 mb-2 w-100"><router-link to="/products" class="nav-link">繼續購物</router-link></button>
             <button type="button" class="btn btn-info rounded-0 text-white fs-8 w-100" @click.prevent="nextCart">下一步</button>
           </div>
@@ -258,12 +263,14 @@
 import { mapActions, mapState } from 'pinia'
 import cartStore from '../../store/cartStore.js'
 import Swal from 'sweetalert2'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 
 export default {
   data () {
     return {
-      text: 'hello',
+      reEnter: false,
+      showEnter: '',
       products: [],
       productId: '',
       lodingItem: '',
@@ -274,7 +281,6 @@ export default {
           name: '',
           email: '',
           tel: ''
-          // address: ''
         },
         message: ''
       },
@@ -287,44 +293,39 @@ export default {
     ...mapActions(cartStore, ['getCart']),
     // 更新購物車
     updateCart (item, qty) { // 購物車id 產品id
-      this.lodingItem = item.id
-      const data = {
-        product_id: item.product.id,
-        qty
-      }
-      this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`, { data })
-        .then(res => {
-          Swal.fire({
-            title: '更新成功!',
-            confirmButtonColor: '#7b7d42cc',
-            icon: 'success',
-            iconColor: '#EBDABC',
-            confirmButtonText: '確認'
+      if (qty >= 1) {
+        this.lodingItem = item.id
+        const data = {
+          product_id: item.product.id,
+          qty
+        }
+        this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`, { data })
+          .then(response => {
+            this.showSuccessAlert(response)
+            this.getCart()
+            this.lodingItem = ''
           })
-          this.getCart()
-          this.lodingItem = ''
-        })
-        .catch((err) => {
-          alert(err.response.data.message)
-        })
+          .catch((err) => {
+            alert(err.response.data.message)
+          })
+      }
     },
     // 刪除單一品項購物車
     deleteCartItem (item) {
       this.lodingItem = item.id
       this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`)
-        .then(res => {
+        .then(response => {
           Swal.fire({
             title: '刪除成功!',
             confirmButtonColor: '#7b7d42cc',
             icon: 'success',
-            iconColor: '#EBDABC',
             confirmButtonText: '確認'
           })
           this.lodingItem = ''
           this.getCart()
         })
-        .catch((err) => {
-          alert(err.data.message)
+        .catch((error) => {
+          this.showErrorAlert(error)
           this.lodingItem = ''
         })
     },
@@ -332,12 +333,11 @@ export default {
     deleteCartAll () {
       this.lodingItem = '123'
       this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/carts`)
-        .then(res => {
+        .then(response => {
           Swal.fire({
             title: '刪除成功!',
             confirmButtonColor: '#7b7d42cc',
             icon: 'success',
-            iconColor: '#EBDABC',
             confirmButtonText: '確認'
           })
           this.lodingItem = ''
@@ -365,17 +365,20 @@ export default {
       this.cart = ''
       this.$refs.form.resetForm()
     },
+    showReEnter (text) {
+      this.showEnter = text
+    },
     // 套用優惠碼
     addCouponCode () {
       const data = { code: this.coupon_code }
       this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/coupon`, { data })
-        .then(res => {
-          this.discount_total_price = res.data.data.final_total
+        .then(response => {
+          this.discount_total_price = response.data.data.final_total
+          this.reEnter = false
           Swal.fire({
             title: '套用成功!',
             confirmButtonColor: '#7b7d42cc',
             icon: 'success',
-            iconColor: '#EBDABC',
             confirmButtonText: '確認'
           })
           this.lodingItem = ''
@@ -385,7 +388,8 @@ export default {
           this.getCart()
         })
         .catch((err) => {
-          alert(err.data)
+          this.showReEnter(err.response.data.message)
+          this.reEnter = true
           this.lodingItem = ''
         })
     },
@@ -398,13 +402,10 @@ export default {
       // 轉址
       this.$router.push('/cartFront')
     },
-    saveCart () {
-
-    }
+    ...mapActions(SweetAlert, ['showSuccessAlert', 'showErrorAlert'])
   },
   computed: {
-    ...mapState(cartStore, ['cart'])
-
+    ...mapState(cartStore, ['cart', 'total', 'final_total'])
   },
   mounted () {
     this.getCart()

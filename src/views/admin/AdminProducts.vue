@@ -60,6 +60,8 @@
 import PaginationComponents from '@/components/PaginationComponents.vue'
 import ProductModal from '@/components/ProductModal.vue'
 import DelProductmodal from '@/components/DelProductmodal.vue'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
@@ -84,7 +86,7 @@ export default {
           this.page = res.data.pagination
         })
         .catch(error => {
-          console.dir(error)
+          this.showErrorAlert(error)
         })
     },
     // 新增 post
@@ -100,28 +102,26 @@ export default {
       }
       this.$http[httpMethod](api, { data: this.template })
 
-        .then(res => {
+        .then(response => {
           this.$refs.productModal.hideModal()
-          alert('新增成功')
+          this.showSuccessAlert(response)
           this.getProduct()
         })
         .catch(error => {
-          alert('新增失敗，請重新檢視')
-          console.dir(error)
+          this.showErrorAlert(error)
         })
     },
 
     // 刪除
     delProduct () {
       this.$http.delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/product/${this.template.id}`)
-        .then(res => {
+        .then(response => {
           this.$refs.delproductModal.hideModal()
-          alert('刪除成功')
+          this.showSuccessAlert(response)
           this.getProduct()
         })
         .catch(error => {
-          console.dir(error)
-          alert('刪除失敗')
+          this.showErrorAlert(error)
         })
     },
 
@@ -140,7 +140,8 @@ export default {
         this.$refs.delproductModal.openModal()
         this.template = { ...item }
       }
-    }
+    },
+    ...mapActions(SweetAlert, ['showSuccessAlert', 'showErrorAlert'])
 
   },
   mounted () {

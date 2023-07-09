@@ -10,7 +10,7 @@
 
   .tastyDetail-product{    
     img{
-      width: 100%;
+      width: 90%;
       height: auto;
     }
     .badge{
@@ -20,8 +20,13 @@
     .price{
       font-size:24px ;
       color: red;
+    }    
+    .product-price{
+      line-height: 52px;
     }
-    
+    .bi-dash-lg:hover,.bi-plus:hover{
+      color: white;
+    }
     button{
       color: #0E376F;
     }
@@ -35,15 +40,16 @@
       font-weight: bold;
       transition: all 0.3s;
     }
-  }
-  .tastyDetail-breadcrumb-list,.tastyDetail-product-item{
-    width: 90%;
-  }
+  } 
   .customer-notice{
     background-image: url(./images/bg-coupon.png);
     .customer-notice-title{
       text-decoration: underline;
 	    text-underline-offset: 5px;
+    }
+    li{
+      text-align: justify;
+      text-justify: distribute-all-lines;
     }
   }
   
@@ -67,6 +73,7 @@
 
   .swiper-father {      
     position: relative;   
+    height: 500px;
     .swiper{
       width: 90%;
     } 
@@ -74,7 +81,7 @@
 
   .swiper-button-prev,.swiper-button-next{
     position: absolute;
-    top: 50%;           
+    top: 35%;           
   }
 
 
@@ -90,7 +97,7 @@
   }
   swiper-slide{
     height: 100%;
-  }
+  }  
 }
 .banner-product{
   background-image: url(./images/tasty-banner.jpg);
@@ -101,15 +108,19 @@
     .tastyDetail-breadcrumb-list,.tastyDetail-product-item{
       width: 100%;
     }   
-    .swiper {
-      
-      height: 450px !important;
-     
+    .swiper {      
+      height: 450px !important;     
     }
-  } 
-  .tastyDetail-product{
-    .badge{
-      font-size: 10px !important;
+    .tastyDetail-product{
+      .badge{
+        font-size: 10px !important;
+      }
+      img{
+        width: 100%;
+      }
     }
-  }
+    .swiper-button-prev,.swiper-button-next{
+      top: 45%;
+    }    
+  }  
  }

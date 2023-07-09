@@ -2,7 +2,6 @@
   <div class="admin-coupon container">
     <h1>優惠卷</h1>
     <div>
-      <!-- <Loading :active="isLoading" :z-index="1060"></Loading> -->
       <div class="text-end mt-4">
         <button class="btn btn-info" type="button" @click="openCouponModal(true,item)">
           建立新的優惠券
@@ -23,7 +22,6 @@
           <td>{{ item.title }}</td>
           <td>{{ item.percent }}%</td>
           <td>{{ new Date(item.due_date).toLocaleDateString('zh-TW') }}</td>
-          <!-- const dateString = new Date(item.due_date).toLocaleDateString('zh-TW'); -->
           <td>
             <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
             <span v-else class="text-muted">未啟用</span>
@@ -51,6 +49,8 @@
 <script>
 import CouponModal from '@/components/CouponModal.vue'
 import DelCouponmodal from '@/components/DelCouponmodal.vue'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
@@ -91,10 +91,11 @@ export default {
       this.$http.get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupons`)
         .then(res => {
           this.coupons = res.data.coupons
-        }).catch(err => {
-          console.log(err)
+        }).catch(error => {
+          this.showErrorAlert(error)
         })
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   },
   mounted () {
     // 取出token

@@ -18,10 +18,12 @@
       </button>
     </form>
   </div>
-
 </template>
 
 <script>
+// import Swal from 'sweetalert2'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL } = import.meta.env
 export default {
   data () {
@@ -31,9 +33,6 @@ export default {
         password: ''
       }
     }
-  },
-  created () {
-
   },
   methods: {
     login () {
@@ -47,9 +46,12 @@ export default {
           // 轉址
           this.$router.push('/admin/products')
         }).catch(error => {
-          console.dir(error)
+          this.user.username = ''
+          this.user.password = ''
+          this.showErrorAlert(error)
         })
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   }
 }
 </script>

@@ -3,14 +3,14 @@
 <div class="web">
   <header class="header fixed-top w-100" :class="{ 'bg-black':isScrolled,'bg-transcolor':!isScrolled }">
     <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light px-3">
         <div class="container-fluid justify-content-between">
           <router-link to="/"><img src="@/assets/images/logo.png" class="logo" alt="麵鋪子" style="filter: brightness(0) saturate(0) invert(1);"></router-link>
           <a class="logo navbar-brand d-none d-md-block " href="#"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:1px solid white"  @click="toggleCollapse">
+            <i class="bi bi-list" style="color: white;"></i>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" ref="collapse">
             <ul class="menu navbar-nav  fs-5 text-center mb-md-0 mb-3">
               <li class="nav-item me-md-4 me-0 mt-md-2  my-2 mt-4">
                 <router-link to="/about" class="nav-link text-white">關於我們</router-link>
@@ -26,7 +26,7 @@
               </li>
 
               <li class="nav-item me-md-0 me-0 my-2">
-                <router-link to="/cart" class="nav-link pe-0"><i class="bi bi-cart-fill"></i><span class="badge rounded-circle cart-badge rounded-pil fs-18">{{cartsLength}}</span></router-link>
+                <router-link to="/cart" class="nav-link pe-0"><i class="bi bi-cart-fill"></i><span class="badge rounded-circle cart-badge rounded-pil fs-18" v-if="cartsLength>0">{{cartsLength}}</span></router-link>
               </li>
             </ul>
           </div>
@@ -52,9 +52,7 @@
         <ul class="contact-info d-flex mb-6 justify-content-between">
             <router-link to="/about" class="me-3 text-decoration-none">關於我們</router-link>
             <router-link to="/products" class="me-3 text-decoration-none">美味專區</router-link>
-            <router-link to="/news" class="me-3 text-decoration-none">最新消息</router-link>
-            <router-link to="/login" class="me-3 text-decoration-none">後台登入</router-link>
-            <router-link to="/admin/products" class="me-3 text-decoration-none">後臺產品列表</router-link>
+            <router-link to="/news" class="text-decoration-none">最新消息</router-link>
         </ul>
         <ul class="contact-icon d-flex justify-content-end">
           <li class="me-3"><a href="#"><i class="bi bi-facebook"></i></a></li>
@@ -78,13 +76,15 @@
 import { RouterView } from 'vue-router'
 import { mapState } from 'pinia'
 import cartStore from '../store/cartStore'
+import Collapse from 'bootstrap/js/dist/collapse'
 export default {
   data () {
     return {
       products: [],
       serchProducts: [],
-      isScrolled: false
-
+      isScrolled: false,
+      isCollapseOpen: false,
+      collapse: null
     }
   },
   components: {
@@ -92,6 +92,11 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ['cartsLength', 'getCart'])
+  },
+  watch: {
+    $route () {
+      this.closeCollapse()
+    }
   },
   methods: {
     handleMouseDown () {
@@ -115,10 +120,25 @@ export default {
       // 轉址
       this.$router.push({ path: '/search', query: { name: this.$refs.serch.value } })
       this.$refs.serch.value = ''
+    },
+    toggleCollapse () {
+      if (!this.isCollapseOpen) {
+        this.isCollapseOpen = true
+        this.isScrolled = true
+      } else {
+        this.isCollapseOpen = false
+      }
+      this.collapse.toggle()
+    },
+    closeCollapse () {
+      this.collapse.hide()
     }
   },
   mounted () {
     this.getCart()
+    this.collapse = new Collapse(this.$refs.collapse, {
+      toggle: false
+    })
     window.addEventListener('scroll', this.setMenuFixed)
   },
   beforeUnmount () {

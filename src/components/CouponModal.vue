@@ -59,6 +59,8 @@
 
 <script>
 import Modal from 'bootstrap/js/dist/modal'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   props: ['isNew', 'coupon', 'getCoupons'],
@@ -94,8 +96,8 @@ export default {
         this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupon`, { data })
           .then(res => {
             this.getCoupons()
-          }).catch(err => {
-            console.log(err)
+          }).catch(error => {
+            this.showErrorAlert(error)
           })
       } else if (this.isNew === false) { // 編輯優惠卷
         this.hideModal()
@@ -103,11 +105,12 @@ export default {
         this.$http.put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`, { data })
           .then(res => {
             this.getCoupons()
-          }).catch(err => {
-            console.log(err)
+          }).catch(error => {
+            this.showErrorAlert(error)
           })
       }
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   },
   watch: {
     coupon () {

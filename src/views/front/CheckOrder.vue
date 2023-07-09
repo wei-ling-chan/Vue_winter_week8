@@ -5,8 +5,8 @@
           :on-cancel="onCancel"
           :loader="loader"
           :is-full-page="fullPage"/>
-  <div style="height: 25vh;"></div>
-  <div class="cart d-none d-md-block d-flex flex-column align-items-center mb-0 mb-md-7 mt-4 mt-md-7">
+  <div class="cart-space"></div>
+  <div class="check-order d-none d-md-block d-flex flex-column align-items-center mb-0 mb-md-7 mt-4 mt-md-7">
     <div class="mx-auto" style="width: 70%;">
       <!-- 購物流程開始 -->
       <div class="position-relative mx-auto m-4 mb-8" style="width: 50%;" v-if="!order.is_paid">
@@ -28,123 +28,112 @@
       <!-- 購物流程結束 -->
 
       <!-- 正式開始 -->
-          <div class="d-flex justify-content-start align-items-start">
-            <table class="table align-middle fs-6 border border-dark" style="width: 50%;">
-              <thead>
-                <tr class="table-dark">
-                  <th>訂單內容</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-                <tr>
-                  <th class="table-image">商品</th>
-                  <th>品名</th>
-                  <th>數量</th>
-                  <th class="text-center">小計</th>
-                  <th class="text-center fs-7" v-if="order.total - totalSum !==0">折扣後金額</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <template v-if="order">
-                  <tr v-for="item in order.products" :key="item.id">
-                    <td>
-                      <div
-                          style="
-                            height: 100px;
-                            background-size: cover;
-                            background-position: center;
-                            width: 100px
-                          "
-                          :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
-                        ></div>
-                    </td>
-                    <td>
-                      {{ item.product.title }}
-                    </td>
-                    <td>
-                      <div class="ms-2 text-center">
-                        {{ item.qty }}
-                      </div>
-                    </td>
-                    <td class="text-center" :class="{ 'text-decoration-line-through': item.total !== item.final_total }">
-                      {{ item.total }}
-                    </td>
-                    <td class="text-center" v-if="order.total !==0">
-                      {{ Math.round(item.total - item.final_total) }}
-                    </td>
-                  </tr>
-                </template>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td class="text-center text-info" v-if="order.total !==0">已折扣</td>
-                  <td class="text-center text-info" v-if="order.total !==0">{{ order.total }}</td>
-                  <td v-if="order.total !==0"></td>
-                  <td class="text-center" style="color: #a64942;" v-if="order.total !==0">金額</td>
-                  <td class="text-center" style="color: #a64942;" v-if="order.total !==0">{{ totalSum }}</td>
-                  <td v-if="order.total ===0"></td>
-                  <td v-if="order.total ===0"></td>
-                  <td class="text-center" style="color: #a64942;" v-if="order.total ===0">總計</td>
-                  <td class="text-center" style="color: #a64942;" v-if="order.total ===0" :class="{ 'text-decoration-line-through': cart.total !== cart.final_total }">{{ totalSum-order.total }}</td>
-                </tr>
-              </tfoot>
-            </table>
-            <!-- 訂單資訊開始 -->
-            <div class=" d-flex flex-column align-items-center ms-4 mb-1 border border-1 border-dark" style="width: 49%;">
-              <div class="text-center fs-6 p-2 bg-dark text-white w-100 border-bottom border-dark">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{ localOrder.inOrOut }}</span></div>
-              <table class="table text-start" style="margin-bottom: -1px !important;">
-                <tbody class="fs-6">
-                  <tr style="height: 46px;">
-                  <th  style="color: #a64942;">取單號</th>
-                  <td  style="color: #a64942;">{{ localOrder.orderCount }}</td>
-                </tr>
-                <tr style="height: 46px;vertical-align:middle;">
-                  <th>Email</th>
-                  <td>{{ order.user.email }}</td>
-                </tr>
-                <tr style="height: 46px;vertical-align:middle;">
-                  <th>姓名</th>
-                  <td>{{ order.user.name }}</td>
-                </tr>
-                <tr style="height: 46px;vertical-align:middle;">
-                  <th>收件人電話</th>
-                  <td>{{ order.user.tel }}</td>
-                </tr>
-                <tr style="height: 46px;vertical-align:middle;">
-                  <th>取餐時間</th>
-                  <td>{{ localOrder.payTime }}</td>
-                </tr>
-                <tr style="height: 46px;vertical-align:middle;">
-                  <th>付款方式</th>
-                  <td>{{ localOrder.payBy }}</td>
-                </tr>
-                <tr style="height: 46px;vertical-align:middle;">
-                  <th>付款狀態</th>
-                  <td>
-                    <span v-if="!order.is_paid">尚未付款</span>
-                    <span v-else class="text-success">付款完成</span>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- 訂單資訊結束 -->
-          </div>
-          <div class="text-end align-self-end mt-2" v-if="order.is_paid === false">
-            <button class="btn btn-info text-light" @click="payOrder">確認付款去</button>
-          </div>
-          <div class="text-end align-self-end mt-2" v-if="order.is_paid === true">
-            <button class="btn btn-info text-light" @click="payOrder">繼續購物</button>
-          </div>
+      <div class="d-flex justify-content-start align-items-start">
+        <table class="table align-middle border border-dark" style="width: 50%;">
+          <thead>
+            <tr class="table-dark text-center fs-md">
+              <th colspan="4">訂單內容</th>
+            </tr>
+            <tr class="fs-md">
+              <th class="table-image text-center order-product">商品</th>
+              <th class="text-center  order-product">品名</th>
+              <th class="text-center  order-product">數量</th>
+              <th class="text-center fs-7  order-product">金額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-if="order">
+              <tr v-for="item in order.products" :key="item.id" class="fs-md">
+                <td>
+                  <div
+                      style="
+                        height: 100px;
+                        background-size: cover;
+                        background-position: center;
+                        width: 100%
+                      "
+                      :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
+                    ></div>
+                </td>
+                <td class="text-center">
+                  {{ item.product.title }}
+                </td>
+                <td>
+                  <div class="ms-2 text-center">
+                    {{ item.qty }}
+                  </div>
+                </td>
+                <td class="text-center" v-if="item.total === item.final_total">
+                  {{ item.total }}
+                </td>
+                <td class="text-center" v-if="item.total !== item.final_total">
+                  {{ Math.round(item.final_total) }}
+                </td>
+              </tr>
+            </template>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="text-center text-info" v-if="order.total !==0">已折扣</td>
+              <td class="text-center text-info" v-if="order.total !==0">{{ totalSum-order.total }}</td>
+              <td class="text-center" style="color: #a64942;" v-if="order.total !==0">金額</td>
+              <td class="text-center" style="color: #a64942;" v-if="order.total ===0">總計</td>
+              <td class="text-center" style="color: #a64942;" v-if="order.total ===0" :class="{ 'text-decoration-line-through': cart.total !== cart.final_total }">{{ totalSum-order.total }}</td>
+            </tr>
+          </tfoot>
+        </table>
+        <!-- 訂單資訊開始 -->
+        <div class=" d-flex flex-column align-items-center ms-4 mb-1 border border-1 border-dark information" style="width: 49%;">
+          <div class="text-center p-2 bg-dark text-white w-100 border-bottom border-dark information-titlte fs-md">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{ localOrder.inOrOut }}</span></div>
+          <table class="table text-start" style="margin-bottom: -1px !important;">
+            <tbody class="fs-md">
+              <tr style="height: 46px;">
+              <th  style="color: #a64942;">取單號</th>
+              <td  style="color: #a64942;">{{ localOrder.orderCount }}</td>
+            </tr>
+            <tr style="height: 46px;vertical-align:middle;">
+              <th>Email</th>
+              <td>{{ order.user.email }}</td>
+            </tr>
+            <tr style="height: 46px;vertical-align:middle;">
+              <th>姓名</th>
+              <td>{{ order.user.name }}</td>
+            </tr>
+            <tr style="height: 46px;vertical-align:middle;">
+              <th>收件人電話</th>
+              <td>{{ order.user.tel }}</td>
+            </tr>
+            <tr style="height: 46px;vertical-align:middle;">
+              <th>取餐時間</th>
+              <td>{{ localOrder.payTime }}</td>
+            </tr>
+            <tr style="height: 46px;vertical-align:middle;">
+              <th>付款方式</th>
+              <td>{{ localOrder.payBy }}</td>
+            </tr>
+            <tr style="height: 46px;vertical-align:middle;">
+              <th>付款狀態</th>
+              <td>
+                <span v-if="!order.is_paid">尚未付款</span>
+                <span v-else class="text-success">付款完成</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- 訂單資訊結束 -->
+      </div>
+      <div class="text-end align-self-end mt-2" v-if="order.is_paid === false">
+        <button class="btn btn-info text-light" @click="payOrder">確認付款去</button>
+      </div>
+      <div class="text-end align-self-end mt-2" v-if="order.is_paid === true">
+        <button class="btn btn-info text-light" @click="payOrder">繼續購物</button>
+      </div>
         <!-- 正式結束 -->
     </div>
   </div>
   <!-- 手機板開始 -->
-  <div class="d-md-none d-flex flex-column align-items-center px-0 table-responsive">
+  <div class="check-order d-md-none d-flex flex-column align-items-center px-0 table-responsive">
     <!-- 購物流程開始 -->
     <div class="position-relative mx-auto m-5 mb-7" style="width: 50%;">
       <div class="progress" style="height: 1px;">
@@ -158,28 +147,22 @@
     <!-- 購物流程結束 -->
     <!-- 正式開始 -->
     <div class="d-flex flex-column px-2">
-      <table class="table align-middle fs-6 border border-dark">
+      <table class="table align-middle border border-dark">
         <thead>
-          <tr class="table-dark">
-            <th>訂單內容</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+          <tr class="table-dark text-center fs-md">
+            <th colspan="4" class="w-100">訂單內容</th>
           </tr>
-          <tr>
-            <th class="table-image">商品</th>
-            <th>品名</th>
-            <th>數量</th>
-            <th class="text-center">小計</th>
-            <th class="text-center fs-7" v-if="order.total - totalSum !==0">折扣後金額</th>
-            <th></th>
+          <tr class="fs-md">
+            <th class="table-image text-center order-product">商品</th>
+            <th class="text-center order-product">品名</th>
+            <th class="text-center order-productr">數量</th>
+            <!-- <th class="text-center">小計</th> -->
+            <th class="text-center order-product">金額</th>
           </tr>
         </thead>
         <tbody>
           <template v-if="order">
-            <tr v-for="item in order.products" :key="item.id">
+            <tr v-for="item in order.products" :key="item.id" class="fs-md">
               <td>
                 <div
                     style="
@@ -191,7 +174,7 @@
                     :style="{ backgroundImage: `url(${ item.product.imageUrl })` }"
                   ></div>
               </td>
-              <td>
+              <td class="text-center">
                 {{ item.product.title }}
               </td>
               <td>
@@ -199,11 +182,11 @@
                   {{ item.qty }}
                 </div>
               </td>
-              <td class="text-center" :class="{ 'text-decoration-line-through': item.total !== item.final_total }">
+              <td class="text-center" v-if="item.total === item.final_total">
                 {{ item.total }}
               </td>
-              <td class="text-center" v-if="order.total !==0">
-                {{ Math.round(item.total - item.final_total) }}
+              <td class="text-center" v-if="item.total !== item.final_total">
+                {{ Math.round(item.final_total) }}
               </td>
             </tr>
           </template>
@@ -211,8 +194,7 @@
         <tfoot>
           <tr>
             <td class="text-center text-info" v-if="order.total !==0">已折扣</td>
-            <td class="text-center text-info" v-if="order.total !==0">{{ order.total }}</td>
-            <td v-if="order.total !==0"></td>
+            <td class="text-center text-info" v-if="order.total !==0">{{ totalSum-order.total }}</td>
             <td class="text-center" style="color: #a64942;" v-if="order.total !==0">金額</td>
             <td class="text-center" style="color: #a64942;" v-if="order.total !==0">{{ totalSum }}</td>
             <td v-if="order.total ===0"></td>
@@ -223,10 +205,10 @@
         </tfoot>
       </table>
       <!-- 訂單資訊開始 -->
-      <div class=" d-flex flex-column align-items-center my-3 border border-1 border-dark">
-        <div class="text-center fs-6 p-2 bg-dark text-white w-100 border-bottom border-dark">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{ localOrder.inOrOut }}</span></div>
+      <div class=" d-flex flex-column align-items-center my-3 border border-1 border-dark information">
+        <div class="text-center p-2 bg-dark text-white w-100 border-bottom border-dark information-title fs-md">訂單資訊<span class="badge text-light ms-2 fw-normal" style="background-color: #356408;">{{ localOrder.inOrOut }}</span></div>
         <table class="table text-start" style="margin-bottom: -1px !important;">
-          <tbody class="fs-6">
+          <tbody class="fs-md">
             <tr style="height: 46px;">
             <th  style="color: #a64942;">取單號</th>
             <td  style="color: #a64942;">{{ localOrder.orderCount }}</td>
@@ -261,10 +243,10 @@
           </tbody>
         </table>
       </div>
+      <div class="text-end align-self-end mt-2 mb-4 px-md-2" v-if="order.is_paid === false">
+        <button class="btn btn-info" @click="payOrder">確認付款去</button>
+      </div>
       <!-- 訂單資訊結束 -->
-    </div>
-    <div class="text-end align-self-end mt-2 mb-4 px-2" v-if="order.is_paid === false">
-      <button class="btn btn-info" @click="payOrder">確認付款去</button>
     </div>
   <!-- 正式結束 -->
   </div>
@@ -320,7 +302,7 @@ export default {
         Swal.fire({
           // sweealert2
           title: '<strong>訂購成功</strong>',
-          iconHtml: '<img src="/vue_winter_week8/src/assets/images/shopping-finish.png">',
+          iconHtml: '<i class="fa-solid fa-check"></i>',
           html: '感謝您的訂購</b>' + '<p>商品將會盡速送達</p> ',
           showCloseButton: true,
           focusConfirm: false,

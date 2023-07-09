@@ -14,18 +14,64 @@
       background-color: white;
       opacity: 0.3;    
     }   
+    .banner-more{   
+      background: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(0, 0, 0, 0) 50%);
+      background-size: 200% 100%;
+      background-position: right bottom;
+      transition: all 0.3s ease-out;
+      color: white;
+      border:1px solid white;    
+      z-index: 9999;   
+      &:hover{
+        background-position: left bottom;       
+        color: black;  
+        border:1px solid white;    
+      }
+      .fa-arrow-right-long{
+        &:hover{
+          color: black;
+        }
+      }
+    }    
+   
     &.banner-1{
-      background-image: url(./images/banner/banner-home1.jpg);               
+      background-image: url(./images/banner/banner-home1.jpg); 
+      .banner-more{
+        transform: translate(-50%,100%);
+        bottom: -6px;
+        left: 50%;
+      }              
     }
     &.banner-2{
-      background-image: url(./images/banner/banner-home2.jpg);       
+      background-image: url(./images/banner/banner-home2.jpg); 
+      .banner-more{
+        transform: translate(-50%,100%);
+        bottom: 20px;
+        left: 50%;        
+      }        
     }
     &.banner-3{
-      background-image: url(./images/banner/banner-home3.png);   
-      
+      background-image: url(./images/banner/banner-home3.png);                   
+      .banner-more{                  
+        background: linear-gradient(to right, black 50%, white 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .3s ease-out;
+        transform: translate(150%,100%);
+        top: 0;
+        left: 0; 
+        &:hover{
+          background-position: left bottom;            
+        }                 
+      }    
     }
     &.banner-4{
-      background-image: url(./images/banner/banner-home4.jpg);      
+      background-image: url(./images/banner/banner-home4.jpg); 
+      .banner-more{
+        transform: translate(-50%,100%);
+        bottom: 0px;
+        left: 50%;
+      }       
     }
     background-size:cover;    
     background-position: center center;
@@ -48,18 +94,13 @@
       width: 90%;     
       padding: 5%;
       font-weight: bold;      
-    }
-    .banner-info a{
-      color:black;
-      &:hover{
-        color: red;
-      }
     }   
   }
   .swiper-button-prev::after,
     .swiper-button-next::after {
       display: none;
-    }
+    }    
+ 
   // css animate
   .anima{   
    animation: likes 6s;    
@@ -160,17 +201,34 @@
     }
     h4{
       color: black;
-      margin: 0.5rem 0 2rem 0;
-      &:hover{
-        color: #7B7D42;
-      }
+      margin: 0.5rem 0 2rem 0;      
     }      
-    .product-catena-item{      
+    .product-catena-item{
+      &:hover{
+        .product-hover{        
+          background-size: 105%;
+        }
+        & h4{
+          color: $success;
+        }
+      }
       z-index: 999;  
       &:hover{
-        overflow: hidden;
-      }
+        overflow: hidden;        
+      }      
       .img-hover{
+        .bg-1{
+          background-image: url(./images/prodduct-catena-1.png);            
+        }
+        .bg-2{
+          background-image: url(./images/prodduct-catena-2.png);            
+        }
+        .bg-3{
+          background-image: url(./images/prodduct-catena-3.png);            
+        }
+        .bg-4{
+          background-image: url(./images/prodduct-catena-4.png);            
+        }
         &:hover{   
           overflow: hidden;       
           img{
@@ -210,10 +268,12 @@
       justify-content: center;
       align-items: center;
       .slide-hover{
-        &:hover{
-          overflow: hidden;
-        }
-      }     
+        overflow: hidden;
+      }   
+      &:hover .slide-img{        
+        transform: scale(1.2);
+        transition: all 2s;
+      }  
     }
     .slide-img {    
       width: 100%;
@@ -222,10 +282,7 @@
       background-position: center center;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
-      &:hover{
-        transform: scale(1.2);
-        transition: all 2s;
-      }
+
     }
     .img-1{
       background-image: url(./images/images_swiper/pro-1.jpg);        
@@ -241,7 +298,7 @@
     }
   
     .swiper-father {      
-      position: relative;   
+      position: relative;      
       .swiper{
         width: 90%;
       } 
@@ -251,7 +308,12 @@
       position: absolute;
       top: 50%;           
     }    
-  
+    .swiper-button-prev{
+      left: 0;
+    }
+    .swiper-button-next{
+      right: 0;
+    }
     .swiper-button-prev img,
     .swiper-button-next img {
       width: 48px;
@@ -272,10 +334,37 @@
   }  
 }
 
+.news{
+  .news-item{
+    height: 350px;
+  }
+  .news-item-in{
+    bottom: 2%;
+  }
+}
 
 /*RWD*/
+
+@include media-breakpoint-up(md){
+  .news{   
+
+    .news-item{
+      height: 350px;
+    }
+  } 
+}
+@include media-breakpoint-up(lg){
+  .news{   
+    // .card{
+    //   height: 100%;
+    // }
+    .news-item{
+      height: 450px;
+    }
+  } 
+}
 @include media-breakpoint-down(xl) {
-  .index{
+  .index{   
     .news-title{
       font-size: 32px;
     }
@@ -284,14 +373,7 @@
         width: 100% !important;
         margin-left: 0 !important;
       }
-    }
-    
-  }
-  
- }
- 
-@include media-breakpoint-down(xl) {
-  .index{
+    }   
     .news{     
       .news-items,.news-border{
         height: 30vh;
@@ -327,20 +409,72 @@
     .swiper{
       height: 100vh !important;
     }  
-  }
+  }  
   .new-product{
     &.bg{
       height: 80vh;        
     }
+  }  
+  .news-item{
+    height: 540px !important;
   }
- 
+  .swiper{
+    height: 700px  !important;
+  }
  }
+ @include media-breakpoint-up(xxl){
+  .index{
+    .banner{
+      &.banner-3{
+        .banner-more{                
+          left: 44%;
+        }  
+      }
+    }
+  }
+  .news-item{    
+    height: 460px !important;
 
+    .swiper-wrapper{
+      height: 600px;
+    }    
+  }
+  .news-item-in{
+    bottom: 5% !important;
+  }
+  .news-swiper{
+    .swiper{
+      height: 560px !important;
+      .swiper-pagination-bullets{
+        bottom: 0 !important;
+      }
+    }
+   
+  }
+ }
+ @include media-breakpoint-down(xxl){
+  .index{
+    .banner{
+      &.banner-3{
+        .banner-more{      
+          left: 43%;
+        }  
+      }
+    }    
+  } 
+ }
  @include media-breakpoint-down(sm){
   .index{
     .banner{       
       &.banner-1{        
-        background-image: url(./images/banner/banner-cut1.jpg);               
+        background-image: url(./images/banner/banner-cut1.jpg);  
+        .banner-more{
+          background-color: black;
+          opacity: 0.5;
+          transform: translate(50%,50%);
+          bottom: 45%;
+          left: 18%;        
+        }             
       }
       &.banner-2{           
         background-image:url(./images/cut/banner2.png);   
@@ -353,7 +487,14 @@
           width: 67% !important;        
           top: 32% !important;
           left: 0% !important;         
-        }  
+        }
+        .banner-more{
+          background-color: black;
+          opacity: 1;
+          transform: translate(50%,50%);
+          bottom: 45%;
+          left: 145%;        
+        }            
       } 
       &.banner-3{           
         background-image:url(./images/cut/banner3.png);
@@ -364,7 +505,12 @@
           width: 13% !important;        
           top: 31% !important;
           left: 20% !important;         
-        }           
+        }    
+        .banner-more{
+          transform: translate(50%,50%);
+          bottom: 45%;
+          left: 75%; 
+        }       
       }    
       &.banner-4{           
         background-image:url(./images/cut/banner4.png);
@@ -377,16 +523,29 @@
           width: 14% !important;        
           top: 39% !important;
           left: 22% !important;         
-        }            
+        }  
+        .banner-more{
+          transform: translate(-50%, 100%);
+          bottom: 55%;
+          left: 241%;
+        }             
       }   
     }    
   }
   .news{
     .news-item{
-      height: 44vh !important;
+      // height: 40vh !important;
+      height: 370px !important;
+
+    }
+    .card{
+      margin: 0 16px;
     }
     .swiper{
-      height: 400px;       
+      height: 530px;       
+    }
+    .swiper img{
+      max-width: 350px;
     }
     h2,.news-title{
       font-size: 32px !important;          
@@ -399,4 +558,16 @@
       margin-bottom: 2px !important;
     }
   }  
- }
+ } 
+
+@media (max-width:375px) {
+  .news{
+    .swiper{
+      height: 500px;
+    }
+    .news-item{     
+      height: 340px !important;
+
+    }
+  }
+}

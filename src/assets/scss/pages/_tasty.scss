@@ -28,8 +28,14 @@
   .banner-products{
     background-image: url(./images/tasty-banner.jpg);
   }
+  .heart{
+    z-index: 2;
+    top:63%;
+    right: 10%;
+    color: red;
+  }
   .fa-heart:hover{
-    color: #FF69B4;
+    color: $danger;
     
   } 
   .fa-heart{
@@ -38,7 +44,7 @@
     }
   } 
   .fa-solid.fa-heart {
-    color: #f61313;
+    color: $danger;
   }
   .tasty-menu{    
     img{      
@@ -60,26 +66,22 @@
     }    
   }
   
-  .tasty-list{  
-    .card{
-      .slide-hover{
-        &:hover{
-          overflow: hidden;
-        }
-      }  
-      .slide-img{        
-        &:hover{
-          transform: scale(1.2);
-          transition: all 0.5s;          
-        }
-      }
-    }    
+  .tasty-list{       
     .tasty-item-title{
       font-size: 24px;
     }
     .tasty-item-price,.tasty-button{
-      font-size: 20px;
-    }     
+     font-weight: 700;
+    }   
+    .text-subPrice{
+      color: #c3c3c3 !important;
+    }
+    .card-add-cart{
+      bottom: 44.5px;
+      left: 10%;
+      z-index: 2;      
+      width: 80%;
+    }
   }
 }
  

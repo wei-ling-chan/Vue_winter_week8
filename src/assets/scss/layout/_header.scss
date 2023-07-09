@@ -6,8 +6,8 @@
 }
 .header{ 
   .logo{
-   max-width: 200px;
-   height: 100px;
+   max-width: 120px;
+   height:auto;
   }
   .bi-person,.bi-search,.bi-cart{
     font-size: 28px;
@@ -68,6 +68,9 @@
 // RWD
 @include media-breakpoint-down(md) {
   .header{
+    .container{
+     background-color: black;
+    }
     .menu{      
       li{
         border:1px solid black;
@@ -88,11 +91,8 @@
     .banner-delicious-title{
     border-bottom: 2px solid white;
     }
-    .banner-info{
-      
-      text-align: center;
-      font-size: 18px;
-      bottom: 7%;          
+    .banner-info{     
+      font-size: 18px;            
     }
     .banner-info-mobile{
       line-height: 2;
@@ -102,14 +102,27 @@
   .banner{
     height: 55vh;
   }
+  .banner-info{
+    top: 63%;
+  }  
 } 
+@include media-breakpoint-down(sm){
+  .logo{
+    max-width: 120px !important;
+    height: auto !important;
+  }
+  .menu{
+    height: 100vh;
+    margin-top: 38%;
+  }  
+}
 
  @include media-breakpoint-down(lg){
     .banner-title{
       top:26%;
     }
     .banner-info{
-      top: 58%;
+      top: 63% !important;
     }  
  }
 

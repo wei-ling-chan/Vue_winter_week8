@@ -1,5 +1,5 @@
 <template>
-  <div class="admin">
+  <div class="admin" v-if="checkSuccess">
     <div class="container">
       這是後台頁面
     <router-link to="/admin/products">後臺產品列表</router-link> |
@@ -15,8 +15,15 @@
 
 <script>
 import { RouterView } from 'vue-router'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL } = import.meta.env
 export default {
+  data () {
+    return {
+      checkSuccess: false
+    }
+  },
   components: {
     RouterView
   },
@@ -32,13 +39,14 @@ export default {
       this.$http.defaults.headers.common.Authorization = token
       this.$http.post(`${VITE_APP_URL}/v2/api/user/check`)
         .then(res => {
-          console.log(res)
+          this.checkSuccess = true
         }
         ).catch(error => {
-          console.dir(error)
+          this.showErrorAlert(error)
           this.$router.push('/login')
         })
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   },
   mounted () {
     this.check()

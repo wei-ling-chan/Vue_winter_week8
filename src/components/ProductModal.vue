@@ -130,6 +130,8 @@
 
 <script>
 import Modal from 'bootstrap/js/dist/modal'
+import { mapActions } from 'pinia'
+import SweetAlert from '@/store/SweetAlert.js'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default ({
   props: ['product'],
@@ -169,12 +171,11 @@ export default ({
       this.$http.post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/admin/upload`, formData)
         .then(res => {
           this.status.fileUploading = false
-          console.log(res.data.imageUrl)
           this.template.imageUrl = res.data.imageUrl
           this.$refs.fileInput.value = ''
-        }).catch(err => {
+        }).catch(error => {
           this.status.fileUploading = false
-          console.log(err)
+          this.showErrorAlert(error)
         })
     },
     openModal () {
@@ -185,7 +186,8 @@ export default ({
     },
     updateProduct () {
       this.$emit('update-product', this.template)
-    }
+    },
+    ...mapActions(SweetAlert, ['showErrorAlert'])
   },
   mounted () {
     // 取出token

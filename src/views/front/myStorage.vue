@@ -1,34 +1,34 @@
 <template>
   <div style="height: 20vh;"></div>
-  <div class="filter-product my-md-5 my-4 tasty-list" ref="filter-product">
+  <div class="my-storage filter-product my-md-5 my-4 tasty-list" ref="filter-product">
     <div class="container">
       <h1 class="text-center mb-md-4 m-0">我的收藏</h1>
       <div class="row" v-if="temProducts.length>0">
-        <div class="col-12 col-md-6 col-xl-4 tasty-item-block" v-for="product in temProducts" :key="product.id">
-          <div class="card mx-2 my-5">
+        <div class="col-12 col-md-6 col-xl-4 tasty-item-block position-relative" v-for="product in temProducts" :key="product.id">
+          <router-link :to="`/product/${ product.id }`" class="card mx-2 my-5 overflow-hidden">
             <div class="slide-hover">
               <img :src="product.imageUrl" alt="收藏" class="slide-img">
             </div>
             <div class="card-body p-3">
             <div class="mb-4 tasty-item">
               <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5 class="card-title fw-bolder tasty-item-title d-block">{{ product.title }}</h5>
+                <h5 class="card-title fw-bolder tasty-item-title d-block text-dark" style="font-size: 30px;">{{ product.title }}</h5>
                 <div><i :class="heartClass(product.id)" @click="toggleFavorite(product.id)"></i></div>
               </div>
               <div class="d-flex justify-content-between">
-                <div class="card-text  text-md end tasty-item-price fs-7">原價 <span class="text-decoration-line-through"> NT$ {{ product.origin_price }}</span></div>
-                <div class="card-text  text-md end tasty-item-price text-danger">優惠價 NT$ {{ product.price }}</div>
+                <div class="card-text text-md end tasty-item-price text-info fs-6" style="font-weight: 700;">特價NT$&nbsp;{{ product.price }}</div>
+                <div class="card-text text-md end fs-7" style="color: #c3c3c3;"><span class="text-decoration-line-through">NT$&nbsp;{{ product.origin_price }}</span></div>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-1  tasty-button">
-              <router-link :to="`/product/${ product.id }`" class="d-md-block btn btn-info text-light more py-2">查看更多</router-link>
-              <button type="button" class="d-md-block btn btn-info text-light" @click="addToCart(product.id,qty)">加入購物車</button>
+              <button type="button" class="d-md-block btn btn-dark text-light w-100">加入購物車</button>
             </div>
             </div>
-          </div>
+          </router-link>
+          <button type="button" class="card-add-cart d-md-block btn btn-dark text-light position-absolute" @click="addToCart(product.id,qty)">加入購物車</button>
         </div>
       </div>
-      <div v-else>
+      <div v-else style="height: 50vh;">
         <div class="h5 py-7 text-center">目前還沒有收藏喔!趕快去收藏吧~</div>
       </div>
     </div>

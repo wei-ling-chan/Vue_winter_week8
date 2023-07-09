@@ -98,7 +98,6 @@
                     </th>
                     <td>{{ item.qty }} / {{ item.product.unit }}</td>
                     <td class="text-end">
-                      <!-- $filters.currency(item.final_total) -->
                       {{  }}
                     </td>
                   </tr>

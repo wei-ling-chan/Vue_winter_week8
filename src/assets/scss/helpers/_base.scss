@@ -1,5 +1,5 @@
-body{  
-  font-family: 'Noto Serif TC';
+body{   
+  font-family: 'Noto Sans TC', sans-serif;
   line-height: 1.5;  
   
   a{
@@ -7,7 +7,7 @@ body{
   }
   ul{
     list-style-type: none;
-  }
+  }  
   div{
     background-size: cover;
     background-position: center center;
@@ -16,6 +16,9 @@ body{
     object-fit: cover;
     max-width: 100%;
     height: auto;
+  }  
+  .container{
+    padding: 0 12px;
   }
 }
 
@@ -26,19 +29,20 @@ body{
   justify-content: center;
   align-items: center;
   box-shadow: -3px 10px 15px -3px rgba(0,0,0,0.1);
-  border-radius: 1rem;
+  border-radius: 1rem;   
   .slide-hover{
-    &:hover{
-      overflow: hidden;
-    }
+    overflow: hidden;
+  }   
+  &:hover .slide-img{   
+            
+    transform: scale(1.2);
+    transition: all 2s;
   }  
-  .slide-img{     
+  
+  .slide-img{        
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;   
-    &:hover{
-      transform: scale(1.2);
-      transition: all 0.5s;          
-    }
+    
   }
   .card-body{
     width: 90%;
@@ -59,12 +63,17 @@ body{
   object-fit:contain;
 }
 .tasty-menu-fixed{  
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  .bi-arrow-up::before {
+    color: white;
+    font-size: 25px;       
+  }    
   display: none; 
   position: fixed;
   bottom: 5%;
-  right: 1%;    
-  background-color: rgba(255, 255, 255, 0);  
+  right: 1%;       
   border-radius: 10px; 
+  z-index: 9999;
   img{      
     width: 20px;
     height: 20px;
